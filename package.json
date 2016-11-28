@@ -1,0 +1,24 @@
+{
+  "name": "websocketGame",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+   "dev":"node node_modules/gulp/bin/gulp.js serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IOriens/webPartOfChessGame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IOriens/webPartOfChessGame/issues"
+  },
+  "homepage": "https://github.com/IOriens/webPartOfChessGame#readme",
+  "devDependencies": {
+    "browser-sync": "^2.17.5",
+    "gulp": "^3.9.1"
+  }
+}
