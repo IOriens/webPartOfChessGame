@@ -27,8 +27,12 @@ Socket.prototype.connect = function (cb) {
     this.stompClient.connect({}, function(frame) {
         that.setConnected(true)
         console.log('Connected: ' + frame)
-        that.stompClient.subscribe('/topic/client', function (data) {
+        that.stompClient.subscribe('/topic/playing', function (data) {
            cb["aiPlay"](JSON.parse(data.body).content)
+        })
+
+        that.stompClient.subscribe('/topic/init', function (data) {
+            cb["init"](JSON.parse(data.body).content)
         })
     })
 }

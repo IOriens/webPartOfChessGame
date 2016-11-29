@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.cqu.kb.dao.ChessmanMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.kb.model.Chessman" >
+    <id column="chessId" property="chessid" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="isRed" property="isred" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    chessId, score, type, isRed
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.cqu.kb.model.ChessmanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from chessman
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from chessman
+    where chessId = #{chessid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from chessman
+    where chessId = #{chessid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.kb.model.Chessman" >
+    insert into chessman (chessId, score, type, 
+      isRed)
+    values (#{chessid,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{isred,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.kb.model.Chessman" >
+    insert into chessman
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chessid != null" >
+        chessId,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="isred != null" >
+        isRed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chessid != null" >
+        #{chessid,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="isred != null" >
+        #{isred,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.kb.model.Chessman" >
+    update chessman
+    <set >
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="isred != null" >
+        isRed = #{isred,jdbcType=BIT},
+      </if>
+    </set>
+    where chessId = #{chessid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.kb.model.Chessman" >
+    update chessman
+    set score = #{score,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      isRed = #{isred,jdbcType=BIT}
+    where chessId = #{chessid,jdbcType=INTEGER}
+  </update>
+</mapper>

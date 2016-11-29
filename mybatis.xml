@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config .//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<!-- 配置数据库连接信息 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost:3306/chinesechess" />
+				<property name="username" value="root" />
+				<property name="password" value="root" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="cn/edu/cqu/kb/mapping/ChessmanMapper.xml" />
+		<mapper resource="cn/edu/cqu/kb/mapping/BRuleMapper.xml" />
+		<mapper resource="cn/edu/cqu/kb/mapping/CRuleMapper.xml" />
+		<mapper resource="cn/edu/cqu/kb/mapping/JRuleMapper.xml" />
+		<mapper resource="cn/edu/cqu/kb/mapping/MRuleMapper.xml" />
+		<mapper resource="cn/edu/cqu/kb/mapping/PRuleMapper.xml"/>
+		<mapper resource="cn/edu/cqu/kb/mapping/SRuleMapper.xml" />
+		<mapper resource="cn/edu/cqu/kb/mapping/XRuleMapper.xml" />
+	</mappers>
+
+</configuration>

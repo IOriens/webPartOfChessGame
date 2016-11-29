@@ -25,7 +25,12 @@ play.init = function () {
     play.isFoul = false; //是否犯规长将
 
     play.socket = new Socket()
-    play.socket.connect({"aiPlay": play.AIPlay})
+    play.socket.connect({
+        "aiPlay": play.AIPlay,
+        "init": function (data) {
+            console.log(data)
+        }
+    })
 
 
     com.pane.isShow = false; //隐藏方块

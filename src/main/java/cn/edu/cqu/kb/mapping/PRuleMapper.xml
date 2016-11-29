@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.cqu.kb.dao.PRuleMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.kb.model.PRule" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="chessId" property="chessid" jdbcType="INTEGER" />
+    <result column="notExistInX_X1" property="notexistinxX1" jdbcType="INTEGER" />
+    <result column="notExistInX_X2" property="notexistinxX2" jdbcType="INTEGER" />
+    <result column="notExistInY_Y1" property="notexistinyY1" jdbcType="INTEGER" />
+    <result column="notExistInY_Y2" property="notexistinyY2" jdbcType="INTEGER" />
+    <result column="existBlack_X" property="existblackX" jdbcType="INTEGER" />
+    <result column="existBlack_Y" property="existblackY" jdbcType="INTEGER" />
+    <result column="existRed_X" property="existredX" jdbcType="INTEGER" />
+    <result column="existRed_Y" property="existredY" jdbcType="INTEGER" />
+    <result column="existOneInY_Y1" property="existoneinyY1" jdbcType="INTEGER" />
+    <result column="existOneInY_Y2" property="existoneinyY2" jdbcType="INTEGER" />
+    <result column="existOneInX_X1" property="existoneinxX1" jdbcType="INTEGER" />
+    <result column="existOneInX_X2" property="existoneinxX2" jdbcType="INTEGER" />
+    <result column="moveTo_X" property="movetoX" jdbcType="INTEGER" />
+    <result column="moveTo_Y" property="movetoY" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, chessId, notExistInX_X1, notExistInX_X2, notExistInY_Y1, notExistInY_Y2, existBlack_X, 
+    existBlack_Y, existRed_X, existRed_Y, existOneInY_Y1, existOneInY_Y2, existOneInX_X1, 
+    existOneInX_X2, moveTo_X, moveTo_Y
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.cqu.kb.model.PRuleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from prule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from prule
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from prule
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.kb.model.PRule" >
+    insert into prule (id, chessId, notExistInX_X1, 
+      notExistInX_X2, notExistInY_Y1, notExistInY_Y2, 
+      existBlack_X, existBlack_Y, existRed_X, 
+      existRed_Y, existOneInY_Y1, existOneInY_Y2, 
+      existOneInX_X1, existOneInX_X2, moveTo_X, 
+      moveTo_Y)
+    values (#{id,jdbcType=INTEGER}, #{chessid,jdbcType=INTEGER}, #{notexistinxX1,jdbcType=INTEGER}, 
+      #{notexistinxX2,jdbcType=INTEGER}, #{notexistinyY1,jdbcType=INTEGER}, #{notexistinyY2,jdbcType=INTEGER}, 
+      #{existblackX,jdbcType=INTEGER}, #{existblackY,jdbcType=INTEGER}, #{existredX,jdbcType=INTEGER}, 
+      #{existredY,jdbcType=INTEGER}, #{existoneinyY1,jdbcType=INTEGER}, #{existoneinyY2,jdbcType=INTEGER}, 
+      #{existoneinxX1,jdbcType=INTEGER}, #{existoneinxX2,jdbcType=INTEGER}, #{movetoX,jdbcType=INTEGER}, 
+      #{movetoY,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.kb.model.PRule" >
+    insert into prule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="chessid != null" >
+        chessId,
+      </if>
+      <if test="notexistinxX1 != null" >
+        notExistInX_X1,
+      </if>
+      <if test="notexistinxX2 != null" >
+        notExistInX_X2,
+      </if>
+      <if test="notexistinyY1 != null" >
+        notExistInY_Y1,
+      </if>
+      <if test="notexistinyY2 != null" >
+        notExistInY_Y2,
+      </if>
+      <if test="existblackX != null" >
+        existBlack_X,
+      </if>
+      <if test="existblackY != null" >
+        existBlack_Y,
+      </if>
+      <if test="existredX != null" >
+        existRed_X,
+      </if>
+      <if test="existredY != null" >
+        existRed_Y,
+      </if>
+      <if test="existoneinyY1 != null" >
+        existOneInY_Y1,
+      </if>
+      <if test="existoneinyY2 != null" >
+        existOneInY_Y2,
+      </if>
+      <if test="existoneinxX1 != null" >
+        existOneInX_X1,
+      </if>
+      <if test="existoneinxX2 != null" >
+        existOneInX_X2,
+      </if>
+      <if test="movetoX != null" >
+        moveTo_X,
+      </if>
+      <if test="movetoY != null" >
+        moveTo_Y,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="chessid != null" >
+        #{chessid,jdbcType=INTEGER},
+      </if>
+      <if test="notexistinxX1 != null" >
+        #{notexistinxX1,jdbcType=INTEGER},
+      </if>
+      <if test="notexistinxX2 != null" >
+        #{notexistinxX2,jdbcType=INTEGER},
+      </if>
+      <if test="notexistinyY1 != null" >
+        #{notexistinyY1,jdbcType=INTEGER},
+      </if>
+      <if test="notexistinyY2 != null" >
+        #{notexistinyY2,jdbcType=INTEGER},
+      </if>
+      <if test="existblackX != null" >
+        #{existblackX,jdbcType=INTEGER},
+      </if>
+      <if test="existblackY != null" >
+        #{existblackY,jdbcType=INTEGER},
+      </if>
+      <if test="existredX != null" >
+        #{existredX,jdbcType=INTEGER},
+      </if>
+      <if test="existredY != null" >
+        #{existredY,jdbcType=INTEGER},
+      </if>
+      <if test="existoneinyY1 != null" >
+        #{existoneinyY1,jdbcType=INTEGER},
+      </if>
+      <if test="existoneinyY2 != null" >
+        #{existoneinyY2,jdbcType=INTEGER},
+      </if>
+      <if test="existoneinxX1 != null" >
+        #{existoneinxX1,jdbcType=INTEGER},
+      </if>
+      <if test="existoneinxX2 != null" >
+        #{existoneinxX2,jdbcType=INTEGER},
+      </if>
+      <if test="movetoX != null" >
+        #{movetoX,jdbcType=INTEGER},
+      </if>
+      <if test="movetoY != null" >
+        #{movetoY,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.kb.model.PRule" >
+    update prule
+    <set >
+      <if test="chessid != null" >
+        chessId = #{chessid,jdbcType=INTEGER},
+      </if>
+      <if test="notexistinxX1 != null" >
+        notExistInX_X1 = #{notexistinxX1,jdbcType=INTEGER},
+      </if>
+      <if test="notexistinxX2 != null" >
+        notExistInX_X2 = #{notexistinxX2,jdbcType=INTEGER},
+      </if>
+      <if test="notexistinyY1 != null" >
+        notExistInY_Y1 = #{notexistinyY1,jdbcType=INTEGER},
+      </if>
+      <if test="notexistinyY2 != null" >
+        notExistInY_Y2 = #{notexistinyY2,jdbcType=INTEGER},
+      </if>
+      <if test="existblackX != null" >
+        existBlack_X = #{existblackX,jdbcType=INTEGER},
+      </if>
+      <if test="existblackY != null" >
+        existBlack_Y = #{existblackY,jdbcType=INTEGER},
+      </if>
+      <if test="existredX != null" >
+        existRed_X = #{existredX,jdbcType=INTEGER},
+      </if>
+      <if test="existredY != null" >
+        existRed_Y = #{existredY,jdbcType=INTEGER},
+      </if>
+      <if test="existoneinyY1 != null" >
+        existOneInY_Y1 = #{existoneinyY1,jdbcType=INTEGER},
+      </if>
+      <if test="existoneinyY2 != null" >
+        existOneInY_Y2 = #{existoneinyY2,jdbcType=INTEGER},
+      </if>
+      <if test="existoneinxX1 != null" >
+        existOneInX_X1 = #{existoneinxX1,jdbcType=INTEGER},
+      </if>
+      <if test="existoneinxX2 != null" >
+        existOneInX_X2 = #{existoneinxX2,jdbcType=INTEGER},
+      </if>
+      <if test="movetoX != null" >
+        moveTo_X = #{movetoX,jdbcType=INTEGER},
+      </if>
+      <if test="movetoY != null" >
+        moveTo_Y = #{movetoY,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.kb.model.PRule" >
+    update prule
+    set chessId = #{chessid,jdbcType=INTEGER},
+      notExistInX_X1 = #{notexistinxX1,jdbcType=INTEGER},
+      notExistInX_X2 = #{notexistinxX2,jdbcType=INTEGER},
+      notExistInY_Y1 = #{notexistinyY1,jdbcType=INTEGER},
+      notExistInY_Y2 = #{notexistinyY2,jdbcType=INTEGER},
+      existBlack_X = #{existblackX,jdbcType=INTEGER},
+      existBlack_Y = #{existblackY,jdbcType=INTEGER},
+      existRed_X = #{existredX,jdbcType=INTEGER},
+      existRed_Y = #{existredY,jdbcType=INTEGER},
+      existOneInY_Y1 = #{existoneinyY1,jdbcType=INTEGER},
+      existOneInY_Y2 = #{existoneinyY2,jdbcType=INTEGER},
+      existOneInX_X1 = #{existoneinxX1,jdbcType=INTEGER},
+      existOneInX_X2 = #{existoneinxX2,jdbcType=INTEGER},
+      moveTo_X = #{movetoX,jdbcType=INTEGER},
+      moveTo_Y = #{movetoY,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
