@@ -25,6 +25,17 @@
 			<!--<audio src="audio/select.wav" id="selectAudio" preload="auto"></audio>-->
 			<div>
 				<div class="bn_box" id="bnBox">
+					<select name="chessboard" id="chessboard">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+					</select>
 					<input type="button" fromTo="offensivePlay" id="tyroPlay"
 						value="开始对弈" />
 					<!--<input type="button" fromTo="offensivePlay" id="superPlay" value="中级水平" />-->
@@ -111,7 +122,9 @@
 				play.depth = 3;
 				// play.init();
 
-				play.socket.sendMessage("/app/init", 8)
+
+				var index = document.getElementById('chessboard').value;
+				play.socket.sendMessage("/app/init", parseInt(index))
 				// }
 			})
 

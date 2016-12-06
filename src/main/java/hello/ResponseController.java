@@ -47,7 +47,7 @@ public class ResponseController {
 		// AI Init
 		String fileName = "∆Â≈Ã/" + Integer.valueOf(value) + ".txt";
 		System.out.println(fileName);
-		AI = new Machine(2, new File(fileName));
+		AI = new Machine(6, new File(fileName));
 
 		// Backend Processing
 		System.out.println(messageID++);
@@ -80,6 +80,8 @@ public class ResponseController {
 	@MessageMapping("/playing")
 	@SendTo("/topic/playing")
 	public ResponseMessage transfer(ClientMessage message) throws Exception {
+		
+//		Thread.sleep(5000);
 
 		// Data from FE
 		String data = message.getFromTo();

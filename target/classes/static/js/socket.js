@@ -2,12 +2,12 @@
  * Created by IOriens on 23/10/2016.
  */
 
-var Socket = function() {
+var Socket = function () {
 	this.stompClient = null
 	this.socketURI = "http://localhost:8080/ws-chess"
 }
 
-Socket.prototype.setConnected = function(connected) {
+Socket.prototype.setConnected = function (connected) {
 	$('#connect').prop("disabled", connected)
 	$('#disconnect').prop("disabled", !connected)
 	if (connected) {
@@ -18,24 +18,35 @@ Socket.prototype.setConnected = function(connected) {
 	$("#greetings").html("")
 }
 
-Socket.prototype.connect = function(cb) {
+Socket.prototype.connect = function (cb) {
 	var socket = new SockJS(this.socketURI)
 	this.stompClient = Stomp.over(socket)
 	var that = this
-	this.stompClient.connect({}, function(frame) {
+	this.stompClient.connect({}, function (frame) {
 		that.setConnected(true)
 		console.log('Connected: ' + frame)
-		that.stompClient.subscribe('/topic/playing', function(data) {
-			cb["aiPlay"](JSON.parse(data.body).content)
-		})
 
-		that.stompClient.subscribe('/topic/init', function(data) {
-			cb["init"](JSON.parse(data.body).content)
-		})
+		for (let i in cb) {
+			// console.log(i)
+			that.stompClient.subscribe('/topic/' + i , function (data) {
+				cb[i](JSON.parse(data.body).content)
+			})
+		}
+		// that.stompClient.subscribe('/topic/playing', function (data) {
+		// 	cb["aiPlay"](JSON.parse(data.body).content)
+		// })
+
+		// that.stompClient.subscribe('/topic/init', function (data) {
+		// 	cb["init"](JSON.parse(data.body).content)
+		// })
+
+		// that.stompClient.subscribe('/topic/init', function (data) {
+		// 	cb["init"](JSON.parse(data.body).content)
+		// })
 	})
 }
 
-Socket.prototype.disconnect = function() {
+Socket.prototype.disconnect = function () {
 	if (stompClient !== null) {
 		this.stompClient.disconnect()
 	}
@@ -44,7 +55,7 @@ Socket.prototype.disconnect = function() {
 	console.log("Disconnected")
 }
 
-Socket.prototype.sendMessage = function(des, msg) {
+Socket.prototype.sendMessage = function (des, msg) {
 	this.stompClient.send(des, {}, JSON.stringify(msg))
 }
 

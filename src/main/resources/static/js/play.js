@@ -137,7 +137,7 @@ play.regret = function () {
 
 // 点击棋盘事件
 play.clickCanvas = function (e) {
-	if (!play.isPlay)
+	if (!play.isPlay || play.my != 1)
 		return false;
 	var key = play.getClickMan(e);
 	var point = play.getClickPoint(e);
@@ -183,6 +183,7 @@ play.clickMan = function (key, x, y) {
 				// com.get("clickAudio").play();
 				// setTimeout(play.AIPlay, 500);
 
+			play.my = -1
 			setTimeout(function () {
 				if (key == "j0") {
 					play.showWin(-1, 3);
@@ -235,17 +236,18 @@ play.clickPoint = function (x, y) {
 			com.dot.dots = [];
 			com.show();
 			// com.get("clickAudio").play();
+
 			// 发送数据到后端
+			play.my = -1;
 			play.socket.sendMessage("/app/playing", {
-					fromTo: record
-				})
+				fromTo: record
+			})
 				// setTimeout(play.AIPlay, 500);
 
 		} else {
 			// alert("不能这么走哦！")
 		}
 	}
-
 }
 
 // Ai自动走棋
@@ -254,7 +256,7 @@ play.AIPlay = function (pace) {
 	// console.log('pace-param: ' + pace)
 
 	// return
-	play.my = -1;
+	
 
 	// 接受后端数据
 	// var pace = AI.init(play.pace.join(""))
@@ -279,6 +281,7 @@ play.AIPlay = function (pace) {
 	}
 	// com.get("clickAudio").play();
 	setTimeout(function () {
+		play.my = 1;
 		if (key == "j0")
 			play.showWin(-1, 1);
 		if (key == "J0")
