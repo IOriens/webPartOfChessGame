@@ -1,12 +1,15 @@
 package cn.edu.cqu.kb.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.cqu.kb.model.MRuleExample.Criteria;
 import cn.edu.cqu.util.Mappers;
 
-public class Chessman {
+public class Chessman implements Serializable{
+	private static final long serialVersionUID = -440171240233291829L;
+
 	public static final int 黑将 = 21, 红将 = 1;
 
 	private Integer chessid;
@@ -94,7 +97,6 @@ public class Chessman {
 	}
 
 	public ArrayList<Rule> getRules() {
-		// TODO 获取知识
 		if (rules == null) {
 			switch (getChessType()) {
 			case 马:
@@ -155,6 +157,9 @@ public class Chessman {
 				rules.addAll(cRules);
 				break;
 			}
+
+			for (Rule rule : rules)
+				rule.setType(getChessType());
 		}
 		return rules;
 	}

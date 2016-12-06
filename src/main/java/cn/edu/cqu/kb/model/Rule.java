@@ -1,6 +1,9 @@
 package cn.edu.cqu.kb.model;
 
-public class Rule {
+import java.io.Serializable;
+
+public class Rule implements Serializable{
+	private static final long serialVersionUID = -1600801610147755071L;
 
 	private Integer id;
 
@@ -100,5 +103,12 @@ public class Rule {
 		if (type != other.type)
 			return false;
 		return true;
+	}
+
+	public String toString() {
+		if (movetoX != null)
+			return getType() + "" + chessid + " moveTo(" + movetoX + "," + movetoY + ")";
+		else
+			return getType() + "" + chessid + "吃对方的将";
 	}
 }

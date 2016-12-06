@@ -25,6 +25,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -46,6 +47,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.34</version>
 		</dependency>
 
 		<!-- log4j -->
@@ -54,7 +56,7 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-
+		
 		<!-- JSON -->
 		<!-- https://www.mkyong.com/java/json-simple-example-read-and-write-json/ -->
 		<dependency>

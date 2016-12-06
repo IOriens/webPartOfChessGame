@@ -65,14 +65,10 @@ html, body {
     margin-top: 20px
 }
 
-.bn_box input{
-    padding: 50px;
-    margin: 8px;
-    font-size: 20px;
+.bn_box {
+    display: none
 }
 
 .download {
     margin-top: 30px
 }
-
-

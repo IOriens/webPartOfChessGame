@@ -1,9 +1,8 @@
 package cn.edu.cqu.kb.dao;
 
-import java.util.List;
-
 import cn.edu.cqu.kb.model.CRule;
 import cn.edu.cqu.kb.model.CRuleExample;
+import java.util.List;
 
 public interface CRuleMapper {
     int deleteByPrimaryKey(Integer id);

@@ -1,6 +1,8 @@
 package cn.edu.cqu.kb.model;
 
 public class JRule extends Rule {
+	private static final long serialVersionUID = 8326398808887682719L;
+
 	public JRule() {
 		super(ChessmanType.½«);
 	}

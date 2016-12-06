@@ -1,6 +1,8 @@
 package cn.edu.cqu.kb.model;
 
 public class XRule extends Rule {
+	private static final long serialVersionUID = 3370891473754603728L;
+
 	public XRule() {
 		super(ChessmanType.Па);
 	}

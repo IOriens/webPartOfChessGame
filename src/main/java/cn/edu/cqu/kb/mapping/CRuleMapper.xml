@@ -4,10 +4,10 @@
   <resultMap id="BaseResultMap" type="cn.edu.cqu.kb.model.CRule" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="chessId" property="chessid" jdbcType="INTEGER" />
-    <result column="existBlack_X" property="existblackX" jdbcType="INTEGER" />
-    <result column="existBlack_Y" property="existblackY" jdbcType="INTEGER" />
-    <result column="existRed_X" property="existredX" jdbcType="INTEGER" />
-    <result column="existRed_Y" property="existredY" jdbcType="INTEGER" />
+    <result column="notExistRed_X" property="notexistredX" jdbcType="INTEGER" />
+    <result column="notExistRed_Y" property="notexistredY" jdbcType="INTEGER" />
+    <result column="notExistBlack_X" property="notexistblackX" jdbcType="INTEGER" />
+    <result column="notExistBlack_Y" property="notexistblackY" jdbcType="INTEGER" />
     <result column="notExistInX_X1" property="notexistinxX1" jdbcType="INTEGER" />
     <result column="notExistInX_X2" property="notexistinxX2" jdbcType="INTEGER" />
     <result column="notExistInY_Y1" property="notexistinyY1" jdbcType="INTEGER" />
@@ -45,7 +45,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, chessId, existBlack_X, existBlack_Y, existRed_X, existRed_Y, notExistInX_X1, 
+    id, chessId, notExistRed_X, notExistRed_Y, notExistBlack_X, notExistBlack_Y, notExistInX_X1, 
     notExistInX_X2, notExistInY_Y1, notExistInY_Y2, moveTo_X, moveTo_Y
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.cqu.kb.model.CRuleExample" >
@@ -74,13 +74,13 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.edu.cqu.kb.model.CRule" >
-    insert into crule (id, chessId, existBlack_X, 
-      existBlack_Y, existRed_X, existRed_Y, 
+    insert into crule (id, chessId, notExistRed_X, 
+      notExistRed_Y, notExistBlack_X, notExistBlack_Y, 
       notExistInX_X1, notExistInX_X2, notExistInY_Y1, 
       notExistInY_Y2, moveTo_X, moveTo_Y
       )
-    values (#{id,jdbcType=INTEGER}, #{chessid,jdbcType=INTEGER}, #{existblackX,jdbcType=INTEGER}, 
-      #{existblackY,jdbcType=INTEGER}, #{existredX,jdbcType=INTEGER}, #{existredY,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{chessid,jdbcType=INTEGER}, #{notexistredX,jdbcType=INTEGER}, 
+      #{notexistredY,jdbcType=INTEGER}, #{notexistblackX,jdbcType=INTEGER}, #{notexistblackY,jdbcType=INTEGER}, 
       #{notexistinxX1,jdbcType=INTEGER}, #{notexistinxX2,jdbcType=INTEGER}, #{notexistinyY1,jdbcType=INTEGER}, 
       #{notexistinyY2,jdbcType=INTEGER}, #{movetoX,jdbcType=INTEGER}, #{movetoY,jdbcType=INTEGER}
       )
@@ -94,17 +94,17 @@
       <if test="chessid != null" >
         chessId,
       </if>
-      <if test="existblackX != null" >
-        existBlack_X,
+      <if test="notexistredX != null" >
+        notExistRed_X,
       </if>
-      <if test="existblackY != null" >
-        existBlack_Y,
+      <if test="notexistredY != null" >
+        notExistRed_Y,
       </if>
-      <if test="existredX != null" >
-        existRed_X,
+      <if test="notexistblackX != null" >
+        notExistBlack_X,
       </if>
-      <if test="existredY != null" >
-        existRed_Y,
+      <if test="notexistblackY != null" >
+        notExistBlack_Y,
       </if>
       <if test="notexistinxX1 != null" >
         notExistInX_X1,
@@ -132,17 +132,17 @@
       <if test="chessid != null" >
         #{chessid,jdbcType=INTEGER},
       </if>
-      <if test="existblackX != null" >
-        #{existblackX,jdbcType=INTEGER},
+      <if test="notexistredX != null" >
+        #{notexistredX,jdbcType=INTEGER},
       </if>
-      <if test="existblackY != null" >
-        #{existblackY,jdbcType=INTEGER},
+      <if test="notexistredY != null" >
+        #{notexistredY,jdbcType=INTEGER},
       </if>
-      <if test="existredX != null" >
-        #{existredX,jdbcType=INTEGER},
+      <if test="notexistblackX != null" >
+        #{notexistblackX,jdbcType=INTEGER},
       </if>
-      <if test="existredY != null" >
-        #{existredY,jdbcType=INTEGER},
+      <if test="notexistblackY != null" >
+        #{notexistblackY,jdbcType=INTEGER},
       </if>
       <if test="notexistinxX1 != null" >
         #{notexistinxX1,jdbcType=INTEGER},
@@ -170,17 +170,17 @@
       <if test="chessid != null" >
         chessId = #{chessid,jdbcType=INTEGER},
       </if>
-      <if test="existblackX != null" >
-        existBlack_X = #{existblackX,jdbcType=INTEGER},
+      <if test="notexistredX != null" >
+        notExistRed_X = #{notexistredX,jdbcType=INTEGER},
       </if>
-      <if test="existblackY != null" >
-        existBlack_Y = #{existblackY,jdbcType=INTEGER},
+      <if test="notexistredY != null" >
+        notExistRed_Y = #{notexistredY,jdbcType=INTEGER},
       </if>
-      <if test="existredX != null" >
-        existRed_X = #{existredX,jdbcType=INTEGER},
+      <if test="notexistblackX != null" >
+        notExistBlack_X = #{notexistblackX,jdbcType=INTEGER},
       </if>
-      <if test="existredY != null" >
-        existRed_Y = #{existredY,jdbcType=INTEGER},
+      <if test="notexistblackY != null" >
+        notExistBlack_Y = #{notexistblackY,jdbcType=INTEGER},
       </if>
       <if test="notexistinxX1 != null" >
         notExistInX_X1 = #{notexistinxX1,jdbcType=INTEGER},
@@ -206,10 +206,10 @@
   <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.kb.model.CRule" >
     update crule
     set chessId = #{chessid,jdbcType=INTEGER},
-      existBlack_X = #{existblackX,jdbcType=INTEGER},
-      existBlack_Y = #{existblackY,jdbcType=INTEGER},
-      existRed_X = #{existredX,jdbcType=INTEGER},
-      existRed_Y = #{existredY,jdbcType=INTEGER},
+      notExistRed_X = #{notexistredX,jdbcType=INTEGER},
+      notExistRed_Y = #{notexistredY,jdbcType=INTEGER},
+      notExistBlack_X = #{notexistblackX,jdbcType=INTEGER},
+      notExistBlack_Y = #{notexistblackY,jdbcType=INTEGER},
       notExistInX_X1 = #{notexistinxX1,jdbcType=INTEGER},
       notExistInX_X2 = #{notexistinxX2,jdbcType=INTEGER},
       notExistInY_Y1 = #{notexistinyY1,jdbcType=INTEGER},

@@ -1,6 +1,7 @@
 package cn.edu.cqu.kb.model;
 
 public class PRule extends Rule {
+	private static final long serialVersionUID = 4719224261233801812L;
 
 	public PRule() {
 		super(ChessmanType.±ø);

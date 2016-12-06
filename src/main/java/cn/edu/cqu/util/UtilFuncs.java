@@ -74,7 +74,7 @@ public class UtilFuncs {
 		}
 	}
 
-	private static boolean isRuleSatisfy(Chessboard board, MRule rule, Chessman man) {
+	public static boolean isRuleSatisfy(Chessboard board, MRule rule, Chessman man) {
 		Point point = board.getPositionOf(man.getChessid());
 		Point targetP = new Point(point.x + rule.getMovetoX(), point.y + rule.getMovetoY());
 		Point notexistP = new Point(point.x + rule.getNotexistX(), point.y + rule.getNotexistY());
@@ -85,36 +85,32 @@ public class UtilFuncs {
 		}
 	}
 
-	private static boolean isRuleSatisfy(Chessboard board, CRule rule, Chessman man) {
+	public static boolean isRuleSatisfy(Chessboard board, CRule rule, Chessman man) {
 		Point point = board.getPositionOf(man.getChessid());
 		Point targetP = new Point(point.x + rule.getMovetoX(), point.y + rule.getMovetoY());
-		if (rule.getNotexistinxX1() != null && rule.getExistblackX() == null && rule.getExistredX() == null) {// X方向红棋、黑棋直行
-			int max = max(point.x + rule.getNotexistinxX1(), point.x + rule.getNotexistinxX2());
-			int min = min(point.x + rule.getNotexistinxX1(), point.x + rule.getNotexistinxX2());
-			return Functions.notExistinX(board, min, max, point.y);
-		} else if (rule.getNotexistinyY1() != null && rule.getExistblackX() == null && rule.getExistredX() == null) {// Y方向直行
-			int max = max(point.y + rule.getNotexistinyY1(), point.y + rule.getNotexistinyY2());
-			int min = min(point.y + rule.getNotexistinyY1(), point.y + rule.getNotexistinyY2());
-			return Functions.notExistinY(board, point.x, min, max);
-		} else if (rule.getNotexistinxX1() != null && (rule.getExistblackX() != null || rule.getExistredX() != null)) {// X方向吃子
+		if (rule.getNotexistinxX1() == null && rule.getNotexistinyY1() == null) {// 走上下左右
+			if (man.getIsred())
+				return Functions.notExistRed(board, targetP.x, targetP.y);
+			else
+				return Functions.notExistBlack(board, targetP.x, targetP.y);
+		} else if (rule.getNotexistinxX1() != null) {// X方向吃子
 			int max = max(point.x + rule.getNotexistinxX1(), point.x + rule.getNotexistinxX2());
 			int min = min(point.x + rule.getNotexistinxX1(), point.x + rule.getNotexistinxX2());
 			if (man.getIsred())
-				return Functions.notExistinX(board, min, max, point.y) && Functions.existBlack(board, targetP.x, targetP.y);
+				return Functions.notExistinX(board, min, max, point.y) && Functions.notExistRed(board, targetP.x, targetP.y);
 			else
-				return Functions.notExistinX(board, min, max, point.y) && Functions.existRed(board, targetP.x, targetP.y);
+				return Functions.notExistinX(board, min, max, point.y) && Functions.notExistBlack(board, targetP.x, targetP.y);
 		} else {// Y方向吃子
 			int max = max(point.y + rule.getNotexistinyY1(), point.y + rule.getNotexistinyY2());
 			int min = min(point.y + rule.getNotexistinyY1(), point.y + rule.getNotexistinyY2());
-			if (man.getIsred()) {
-				boolean value = Functions.notExistinY(board, point.x, min, max) && Functions.existBlack(board, targetP.x, targetP.y);
-				return value;
-			} else
-				return Functions.notExistinY(board, point.x, min, max) && Functions.existRed(board, targetP.x, targetP.y);
+			if (man.getIsred())
+				return Functions.notExistinY(board, point.x, min, max) && Functions.notExistRed(board, targetP.x, targetP.y);
+			else
+				return Functions.notExistinY(board, point.x, min, max) && Functions.notExistBlack(board, targetP.x, targetP.y);
 		}
 	}
 
-	private static boolean isRuleSatisfy(Chessboard board, PRule rule, Chessman man) {
+	public static boolean isRuleSatisfy(Chessboard board, PRule rule, Chessman man) {
 		Point point = board.getPositionOf(man.getChessid());
 		Point targetP = new Point(point.x + rule.getMovetoX(), point.y + rule.getMovetoY());
 
@@ -143,7 +139,7 @@ public class UtilFuncs {
 		}
 	}
 
-	private static boolean isRuleSatisfy(Chessboard board, BRule rule, Chessman man) {
+	public static boolean isRuleSatisfy(Chessboard board, BRule rule, Chessman man) {
 		Point point = board.getPositionOf(man.getChessid());
 		Point targetP = new Point(point.x + rule.getMovetoX(), point.y + rule.getMovetoY());
 		if (man.getIsred()) {
@@ -161,7 +157,7 @@ public class UtilFuncs {
 		}
 	}
 
-	private static boolean isRuleSatisfy(Chessboard board, SRule rule, Chessman man) {
+	public static boolean isRuleSatisfy(Chessboard board, SRule rule, Chessman man) {
 		Point point = board.getPositionOf(man.getChessid());
 		Point targetP = new Point(point.x + rule.getMovetoX(), point.y + rule.getMovetoY());
 		if (man.getIsred()) {
@@ -171,7 +167,7 @@ public class UtilFuncs {
 		}
 	}
 
-	private static boolean isRuleSatisfy(Chessboard board, JRule rule, Chessman man) {
+	public static boolean isRuleSatisfy(Chessboard board, JRule rule, Chessman man) {
 		Point point = board.getPositionOf(man.getChessid());
 		if (man.getIsred()) {
 			if (rule.getFacetoface() == null || rule.getFacetoface() == false) {
@@ -190,7 +186,7 @@ public class UtilFuncs {
 		}
 	}
 
-	private static boolean isRuleSatisfy(Chessboard board, XRule rule, Chessman man) {
+	public static boolean isRuleSatisfy(Chessboard board, XRule rule, Chessman man) {
 		Point point = board.getPositionOf(man.getChessid());
 		Point targetP = new Point(point.x + rule.getMovetoX(), point.y + rule.getMovetoY());
 		Point notexistP = new Point(point.x + rule.getNotexistX(), point.y + rule.getNotexistY());
@@ -201,17 +197,17 @@ public class UtilFuncs {
 		}
 	}
 
-	private static int max(int i, int j) {
+	public static int max(int i, int j) {
 		return i > j ? i : j;
 	}
 
-	private static int min(int i, int j) {
+	public static int min(int i, int j) {
 		return i > j ? j : i;
 	}
 
 	public static void initChessboardTo(File cFile, Chessboard init) throws FileNotFoundException {
 		int[][] chessboard = new int[9][10];
-		Scanner sin = new Scanner(cFile);
+		Scanner sin = new Scanner(cFile,"UTF-8");
 		for (int y = chessboard[0].length - 1; y >= 0; y--) {
 			String string = sin.nextLine();
 			String[] strings = string.split(",");
@@ -220,9 +216,38 @@ public class UtilFuncs {
 			}
 		}
 
-		if (sin.hasNextLine() && sin.nextLine().equals("黑先"))
+		String first=sin.nextLine();
+		if (first.equals("黑先"))
 			init.initTo(chessboard, false);
 		else
 			init.initTo(chessboard, true);
+	}
+
+	public static boolean isRuleSatisfy(Chessboard board, Rule rule, Chessman man) {
+		boolean satisfy = false;
+		switch (man.getChessType()) {
+		case 兵:
+			satisfy = isRuleSatisfy(board, (BRule) rule, man);
+			break;
+		case 士:
+			satisfy = isRuleSatisfy(board, (SRule) rule, man);
+			break;
+		case 将:
+			satisfy = isRuleSatisfy(board, (JRule) rule, man);
+			break;
+		case 炮:
+			satisfy = isRuleSatisfy(board, (PRule) rule, man);
+			break;
+		case 相:
+			satisfy = isRuleSatisfy(board, (XRule) rule, man);
+			break;
+		case 车:
+			satisfy = isRuleSatisfy(board, (CRule) rule, man);
+			break;
+		case 马:
+			satisfy = isRuleSatisfy(board, (MRule) rule, man);
+			break;
+		}
+		return satisfy;
 	}
 }

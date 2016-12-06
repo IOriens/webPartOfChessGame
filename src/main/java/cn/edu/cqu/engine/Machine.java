@@ -7,12 +7,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cn.edu.cqu.db.Chessboard;
+import cn.edu.cqu.db.Holder;
 import cn.edu.cqu.kb.model.Rule;
 import cn.edu.cqu.util.UtilFuncs;
 
 public class Machine {
 	private LinkedList<Chessboard> history;
 	private int depth;
+	private Holder holder;
 
 	/**
 	 * @param depth
@@ -22,6 +24,8 @@ public class Machine {
 	 * @throws FileNotFoundException
 	 */
 	public Machine(int depth, File chessboardFile) throws FileNotFoundException {
+		holder = Holder.getInstance(chessboardFile.getAbsolutePath());
+
 		history = new LinkedList<>();
 		Chessboard init = new Chessboard();
 		history.add(init);
@@ -37,9 +41,10 @@ public class Machine {
 	public Move search() {
 		Chessboard father = history.getLast();
 		List<Rule> recommandList = new LinkedList<>();
-		recommandList.addAll(history.getLast().getReasonList());
+		if (history.size() >= 3)
+			recommandList.addAll(history.get(history.size() - 1).getReasonList());
 
-		AlphaBetaSearch abSearch = new AlphaBetaSearch(depth, father, recommandList);
+		AlphaBetaSearch abSearch = new AlphaBetaSearch(depth, father, recommandList, holder);
 		Rule ruleToUse = abSearch.search();
 
 		// Rule ruleToUse = null;
@@ -70,18 +75,18 @@ public class Machine {
 			move.ep = new Point(0, 0);
 			move.setRedWin(!father.isRedStep());
 		}
+
 		return move;
 	}
 
 	public List<Rule> getReasonList() {
-		if (history.size() >= 3) {
+		if (history.size() >= 2) {
 			return history.get(history.size() - 2).getReasonList();
 		} else
 			return null;
 	}
 
 	public Chessboard makeMove(Point sp, Point ep) {
-		// TODO 应当检查步骤的有效性
 		Chessboard chessboard = new Chessboard();
 		chessboard.genFrom(history.getLast(), sp, ep);
 		history.add(chessboard);
@@ -96,8 +101,11 @@ public class Machine {
 		return history.getLast();
 	}
 
+	public void close() {
+		holder.writeToFile();
+	}
+
 	public Chessboard getCurrentChessboard() {
 		return history.getLast();
 	}
-
 }

@@ -1,18 +1,19 @@
 package cn.edu.cqu.kb.model;
 
 public class CRule extends Rule {
+	private static final long serialVersionUID = 1518392092490603686L;
 
 	public CRule() {
 		super(ChessmanType.³µ);
 	}
 
-	private Integer existblackX;
+	private Integer notexistredX;
 
-	private Integer existblackY;
+	private Integer notexistredY;
 
-	private Integer existredX;
+	private Integer notexistblackX;
 
-	private Integer existredY;
+	private Integer notexistblackY;
 
 	private Integer notexistinxX1;
 
@@ -22,36 +23,36 @@ public class CRule extends Rule {
 
 	private Integer notexistinyY2;
 
-	public Integer getExistblackX() {
-		return existblackX;
+	public Integer getNotexistredX() {
+		return notexistredX;
 	}
 
-	public void setExistblackX(Integer existblackX) {
-		this.existblackX = existblackX;
+	public void setNotexistredX(Integer notexistredX) {
+		this.notexistredX = notexistredX;
 	}
 
-	public Integer getExistblackY() {
-		return existblackY;
+	public Integer getNotexistredY() {
+		return notexistredY;
 	}
 
-	public void setExistblackY(Integer existblackY) {
-		this.existblackY = existblackY;
+	public void setNotexistredY(Integer notexistredY) {
+		this.notexistredY = notexistredY;
 	}
 
-	public Integer getExistredX() {
-		return existredX;
+	public Integer getNotexistblackX() {
+		return notexistblackX;
 	}
 
-	public void setExistredX(Integer existredX) {
-		this.existredX = existredX;
+	public void setNotexistblackX(Integer notexistblackX) {
+		this.notexistblackX = notexistblackX;
 	}
 
-	public Integer getExistredY() {
-		return existredY;
+	public Integer getNotexistblackY() {
+		return notexistblackY;
 	}
 
-	public void setExistredY(Integer existredY) {
-		this.existredY = existredY;
+	public void setNotexistblackY(Integer notexistblackY) {
+		this.notexistblackY = notexistblackY;
 	}
 
 	public Integer getNotexistinxX1() {

@@ -224,243 +224,243 @@ public class CRuleExample {
             return (Criteria) this;
         }
 
-        public Criteria andExistblackXIsNull() {
-            addCriterion("existBlack_X is null");
+        public Criteria andNotexistredXIsNull() {
+            addCriterion("notExistRed_X is null");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackXIsNotNull() {
-            addCriterion("existBlack_X is not null");
+        public Criteria andNotexistredXIsNotNull() {
+            addCriterion("notExistRed_X is not null");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackXEqualTo(Integer value) {
-            addCriterion("existBlack_X =", value, "existblackX");
+        public Criteria andNotexistredXEqualTo(Integer value) {
+            addCriterion("notExistRed_X =", value, "notexistredX");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackXNotEqualTo(Integer value) {
-            addCriterion("existBlack_X <>", value, "existblackX");
+        public Criteria andNotexistredXNotEqualTo(Integer value) {
+            addCriterion("notExistRed_X <>", value, "notexistredX");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackXGreaterThan(Integer value) {
-            addCriterion("existBlack_X >", value, "existblackX");
+        public Criteria andNotexistredXGreaterThan(Integer value) {
+            addCriterion("notExistRed_X >", value, "notexistredX");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackXGreaterThanOrEqualTo(Integer value) {
-            addCriterion("existBlack_X >=", value, "existblackX");
+        public Criteria andNotexistredXGreaterThanOrEqualTo(Integer value) {
+            addCriterion("notExistRed_X >=", value, "notexistredX");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackXLessThan(Integer value) {
-            addCriterion("existBlack_X <", value, "existblackX");
+        public Criteria andNotexistredXLessThan(Integer value) {
+            addCriterion("notExistRed_X <", value, "notexistredX");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackXLessThanOrEqualTo(Integer value) {
-            addCriterion("existBlack_X <=", value, "existblackX");
+        public Criteria andNotexistredXLessThanOrEqualTo(Integer value) {
+            addCriterion("notExistRed_X <=", value, "notexistredX");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackXIn(List<Integer> values) {
-            addCriterion("existBlack_X in", values, "existblackX");
+        public Criteria andNotexistredXIn(List<Integer> values) {
+            addCriterion("notExistRed_X in", values, "notexistredX");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackXNotIn(List<Integer> values) {
-            addCriterion("existBlack_X not in", values, "existblackX");
+        public Criteria andNotexistredXNotIn(List<Integer> values) {
+            addCriterion("notExistRed_X not in", values, "notexistredX");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackXBetween(Integer value1, Integer value2) {
-            addCriterion("existBlack_X between", value1, value2, "existblackX");
+        public Criteria andNotexistredXBetween(Integer value1, Integer value2) {
+            addCriterion("notExistRed_X between", value1, value2, "notexistredX");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackXNotBetween(Integer value1, Integer value2) {
-            addCriterion("existBlack_X not between", value1, value2, "existblackX");
+        public Criteria andNotexistredXNotBetween(Integer value1, Integer value2) {
+            addCriterion("notExistRed_X not between", value1, value2, "notexistredX");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackYIsNull() {
-            addCriterion("existBlack_Y is null");
+        public Criteria andNotexistredYIsNull() {
+            addCriterion("notExistRed_Y is null");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackYIsNotNull() {
-            addCriterion("existBlack_Y is not null");
+        public Criteria andNotexistredYIsNotNull() {
+            addCriterion("notExistRed_Y is not null");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackYEqualTo(Integer value) {
-            addCriterion("existBlack_Y =", value, "existblackY");
+        public Criteria andNotexistredYEqualTo(Integer value) {
+            addCriterion("notExistRed_Y =", value, "notexistredY");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackYNotEqualTo(Integer value) {
-            addCriterion("existBlack_Y <>", value, "existblackY");
+        public Criteria andNotexistredYNotEqualTo(Integer value) {
+            addCriterion("notExistRed_Y <>", value, "notexistredY");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackYGreaterThan(Integer value) {
-            addCriterion("existBlack_Y >", value, "existblackY");
+        public Criteria andNotexistredYGreaterThan(Integer value) {
+            addCriterion("notExistRed_Y >", value, "notexistredY");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackYGreaterThanOrEqualTo(Integer value) {
-            addCriterion("existBlack_Y >=", value, "existblackY");
+        public Criteria andNotexistredYGreaterThanOrEqualTo(Integer value) {
+            addCriterion("notExistRed_Y >=", value, "notexistredY");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackYLessThan(Integer value) {
-            addCriterion("existBlack_Y <", value, "existblackY");
+        public Criteria andNotexistredYLessThan(Integer value) {
+            addCriterion("notExistRed_Y <", value, "notexistredY");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackYLessThanOrEqualTo(Integer value) {
-            addCriterion("existBlack_Y <=", value, "existblackY");
+        public Criteria andNotexistredYLessThanOrEqualTo(Integer value) {
+            addCriterion("notExistRed_Y <=", value, "notexistredY");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackYIn(List<Integer> values) {
-            addCriterion("existBlack_Y in", values, "existblackY");
+        public Criteria andNotexistredYIn(List<Integer> values) {
+            addCriterion("notExistRed_Y in", values, "notexistredY");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackYNotIn(List<Integer> values) {
-            addCriterion("existBlack_Y not in", values, "existblackY");
+        public Criteria andNotexistredYNotIn(List<Integer> values) {
+            addCriterion("notExistRed_Y not in", values, "notexistredY");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackYBetween(Integer value1, Integer value2) {
-            addCriterion("existBlack_Y between", value1, value2, "existblackY");
+        public Criteria andNotexistredYBetween(Integer value1, Integer value2) {
+            addCriterion("notExistRed_Y between", value1, value2, "notexistredY");
             return (Criteria) this;
         }
 
-        public Criteria andExistblackYNotBetween(Integer value1, Integer value2) {
-            addCriterion("existBlack_Y not between", value1, value2, "existblackY");
+        public Criteria andNotexistredYNotBetween(Integer value1, Integer value2) {
+            addCriterion("notExistRed_Y not between", value1, value2, "notexistredY");
             return (Criteria) this;
         }
 
-        public Criteria andExistredXIsNull() {
-            addCriterion("existRed_X is null");
+        public Criteria andNotexistblackXIsNull() {
+            addCriterion("notExistBlack_X is null");
             return (Criteria) this;
         }
 
-        public Criteria andExistredXIsNotNull() {
-            addCriterion("existRed_X is not null");
+        public Criteria andNotexistblackXIsNotNull() {
+            addCriterion("notExistBlack_X is not null");
             return (Criteria) this;
         }
 
-        public Criteria andExistredXEqualTo(Integer value) {
-            addCriterion("existRed_X =", value, "existredX");
+        public Criteria andNotexistblackXEqualTo(Integer value) {
+            addCriterion("notExistBlack_X =", value, "notexistblackX");
             return (Criteria) this;
         }
 
-        public Criteria andExistredXNotEqualTo(Integer value) {
-            addCriterion("existRed_X <>", value, "existredX");
+        public Criteria andNotexistblackXNotEqualTo(Integer value) {
+            addCriterion("notExistBlack_X <>", value, "notexistblackX");
             return (Criteria) this;
         }
 
-        public Criteria andExistredXGreaterThan(Integer value) {
-            addCriterion("existRed_X >", value, "existredX");
+        public Criteria andNotexistblackXGreaterThan(Integer value) {
+            addCriterion("notExistBlack_X >", value, "notexistblackX");
             return (Criteria) this;
         }
 
-        public Criteria andExistredXGreaterThanOrEqualTo(Integer value) {
-            addCriterion("existRed_X >=", value, "existredX");
+        public Criteria andNotexistblackXGreaterThanOrEqualTo(Integer value) {
+            addCriterion("notExistBlack_X >=", value, "notexistblackX");
             return (Criteria) this;
         }
 
-        public Criteria andExistredXLessThan(Integer value) {
-            addCriterion("existRed_X <", value, "existredX");
+        public Criteria andNotexistblackXLessThan(Integer value) {
+            addCriterion("notExistBlack_X <", value, "notexistblackX");
             return (Criteria) this;
         }
 
-        public Criteria andExistredXLessThanOrEqualTo(Integer value) {
-            addCriterion("existRed_X <=", value, "existredX");
+        public Criteria andNotexistblackXLessThanOrEqualTo(Integer value) {
+            addCriterion("notExistBlack_X <=", value, "notexistblackX");
             return (Criteria) this;
         }
 
-        public Criteria andExistredXIn(List<Integer> values) {
-            addCriterion("existRed_X in", values, "existredX");
+        public Criteria andNotexistblackXIn(List<Integer> values) {
+            addCriterion("notExistBlack_X in", values, "notexistblackX");
             return (Criteria) this;
         }
 
-        public Criteria andExistredXNotIn(List<Integer> values) {
-            addCriterion("existRed_X not in", values, "existredX");
+        public Criteria andNotexistblackXNotIn(List<Integer> values) {
+            addCriterion("notExistBlack_X not in", values, "notexistblackX");
             return (Criteria) this;
         }
 
-        public Criteria andExistredXBetween(Integer value1, Integer value2) {
-            addCriterion("existRed_X between", value1, value2, "existredX");
+        public Criteria andNotexistblackXBetween(Integer value1, Integer value2) {
+            addCriterion("notExistBlack_X between", value1, value2, "notexistblackX");
             return (Criteria) this;
         }
 
-        public Criteria andExistredXNotBetween(Integer value1, Integer value2) {
-            addCriterion("existRed_X not between", value1, value2, "existredX");
+        public Criteria andNotexistblackXNotBetween(Integer value1, Integer value2) {
+            addCriterion("notExistBlack_X not between", value1, value2, "notexistblackX");
             return (Criteria) this;
         }
 
-        public Criteria andExistredYIsNull() {
-            addCriterion("existRed_Y is null");
+        public Criteria andNotexistblackYIsNull() {
+            addCriterion("notExistBlack_Y is null");
             return (Criteria) this;
         }
 
-        public Criteria andExistredYIsNotNull() {
-            addCriterion("existRed_Y is not null");
+        public Criteria andNotexistblackYIsNotNull() {
+            addCriterion("notExistBlack_Y is not null");
             return (Criteria) this;
         }
 
-        public Criteria andExistredYEqualTo(Integer value) {
-            addCriterion("existRed_Y =", value, "existredY");
+        public Criteria andNotexistblackYEqualTo(Integer value) {
+            addCriterion("notExistBlack_Y =", value, "notexistblackY");
             return (Criteria) this;
         }
 
-        public Criteria andExistredYNotEqualTo(Integer value) {
-            addCriterion("existRed_Y <>", value, "existredY");
+        public Criteria andNotexistblackYNotEqualTo(Integer value) {
+            addCriterion("notExistBlack_Y <>", value, "notexistblackY");
             return (Criteria) this;
         }
 
-        public Criteria andExistredYGreaterThan(Integer value) {
-            addCriterion("existRed_Y >", value, "existredY");
+        public Criteria andNotexistblackYGreaterThan(Integer value) {
+            addCriterion("notExistBlack_Y >", value, "notexistblackY");
             return (Criteria) this;
         }
 
-        public Criteria andExistredYGreaterThanOrEqualTo(Integer value) {
-            addCriterion("existRed_Y >=", value, "existredY");
+        public Criteria andNotexistblackYGreaterThanOrEqualTo(Integer value) {
+            addCriterion("notExistBlack_Y >=", value, "notexistblackY");
             return (Criteria) this;
         }
 
-        public Criteria andExistredYLessThan(Integer value) {
-            addCriterion("existRed_Y <", value, "existredY");
+        public Criteria andNotexistblackYLessThan(Integer value) {
+            addCriterion("notExistBlack_Y <", value, "notexistblackY");
             return (Criteria) this;
         }
 
-        public Criteria andExistredYLessThanOrEqualTo(Integer value) {
-            addCriterion("existRed_Y <=", value, "existredY");
+        public Criteria andNotexistblackYLessThanOrEqualTo(Integer value) {
+            addCriterion("notExistBlack_Y <=", value, "notexistblackY");
             return (Criteria) this;
         }
 
-        public Criteria andExistredYIn(List<Integer> values) {
-            addCriterion("existRed_Y in", values, "existredY");
+        public Criteria andNotexistblackYIn(List<Integer> values) {
+            addCriterion("notExistBlack_Y in", values, "notexistblackY");
             return (Criteria) this;
         }
 
-        public Criteria andExistredYNotIn(List<Integer> values) {
-            addCriterion("existRed_Y not in", values, "existredY");
+        public Criteria andNotexistblackYNotIn(List<Integer> values) {
+            addCriterion("notExistBlack_Y not in", values, "notexistblackY");
             return (Criteria) this;
         }
 
-        public Criteria andExistredYBetween(Integer value1, Integer value2) {
-            addCriterion("existRed_Y between", value1, value2, "existredY");
+        public Criteria andNotexistblackYBetween(Integer value1, Integer value2) {
+            addCriterion("notExistBlack_Y between", value1, value2, "notexistblackY");
             return (Criteria) this;
         }
 
-        public Criteria andExistredYNotBetween(Integer value1, Integer value2) {
-            addCriterion("existRed_Y not between", value1, value2, "existredY");
+        public Criteria andNotexistblackYNotBetween(Integer value1, Integer value2) {
+            addCriterion("notExistBlack_Y not between", value1, value2, "notexistblackY");
             return (Criteria) this;
         }
 
