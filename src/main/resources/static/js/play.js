@@ -29,6 +29,7 @@ play.initMMMap = function(map) {
 play.init = function (map) {
 
 	play.my = 1; // 玩家方
+	play.changeTip(0)
 	if (map) {
 		com.currentInitMap = com.json2arr(map)
 			// console.log(com.currentInitMap)
@@ -132,6 +133,7 @@ play.regret = function () {
 	}
 	play.map = map;
 	play.my = 1;
+	play.changeTip(0)
 	play.isPlay = true;
 	com.show();
 }
@@ -185,6 +187,7 @@ play.clickMan = function (key, x, y) {
 				// setTimeout(play.AIPlay, 500);
 
 			play.my = -1
+			play.changeTip(1)
 			setTimeout(function () {
 				if (key == "j0") {
 					play.showWin(-1, 3);
@@ -195,7 +198,7 @@ play.clickMan = function (key, x, y) {
 						fromTo: record
 					})
 				}
-			}, 500);
+			}, 300);
 
 		}
 		// 选中棋子
@@ -240,6 +243,7 @@ play.clickPoint = function (x, y) {
 
 			// 发送数据到后端
 			play.my = -1;
+			play.changeTip(1)
 			play.socket.sendMessage("/app/playing", {
 				fromTo: record
 			})
@@ -280,15 +284,27 @@ play.AIPlay = function (pace) {
 	} else {
 		play.AIclickPoint(pace[2], pace[3]);
 	}
+
+	
+	play.changeTip(0)
 	// com.get("clickAudio").play();
 	setTimeout(function () {
+		
 		play.my = 1;
 		if (key == "j0")
 			play.showWin(-1, 1);
 		if (key == "J0")
 			play.showWin(1, 2);
-	}, 500)
+	}, 300)
 
+}
+
+play.changeTip = function (flag) {
+	if(flag) {
+		document.getElementById('tip').innerHTML = "电脑正在思考哦"
+	} else {
+		document.getElementById('tip').innerHTML = "该你下棋咯"
+	}
 }
 
 // 检查是否长将

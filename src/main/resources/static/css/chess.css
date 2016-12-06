@@ -1,12 +1,3 @@
-/**
- * ChinaChess - in html5
- * http://www.jnzo.com/chess/
- * @ author 一叶孤舟
- * @ mail itlwei@163.com
- * @ QQ 28701884
- */
-
-/*@charset "gb2312";*/
 body {
     font-size: 12px;
     line-height: 150%;
@@ -73,6 +64,11 @@ html, body {
     margin-top: 30px
 }
 
-label {
+label, #tip {
     color: #fff;
+}
+
+#tip {
+    display: block;
+    padding: 10px;
 }
