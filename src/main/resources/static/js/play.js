@@ -8,10 +8,15 @@
 
 var play = play || {};
 
-play.init = function () {
+play.init = function (map) {
 
     play.my = 1; //玩家方
-    play.map = com.arr2Clone(com.initMap); //初始化棋盘
+    if(map) {
+        com.currentInitMap = com.json2arr(map)
+        console.log(com.currentInitMap)
+    }
+    play.map = com.arr2Clone(com.currentInitMap); //初始化棋盘
+    console.log('play.map:\n', play.map)
     play.nowManKey = false; //现在要操作的棋子
     play.pace = []; //记录每一步
     play.isPlay = true; //是否能走棋
@@ -24,15 +29,6 @@ play.init = function () {
 
     play.isFoul = false; //是否犯规长将
 
-    play.socket = new Socket()
-    play.socket.connect({
-        "aiPlay": play.AIPlay,
-        "init": function (data) {
-            console.log(data)
-        }
-    })
-
-
     com.pane.isShow = false; //隐藏方块
 
     //初始化棋子
@@ -40,6 +36,7 @@ play.init = function () {
         for (var n = 0; n < play.map[i].length; n++) {
             var key = play.map[i][n];
             if (key) {
+                console.log(key)
                 com.mans[key].x = n;
                 com.mans[key].y = i;
                 com.mans[key].isShow = true;
@@ -50,27 +47,27 @@ play.init = function () {
 
     //绑定点击事件
     com.canvas.addEventListener("click", play.clickCanvas)
-    //clearInterval(play.timer);
-    //com.get("autoPlay").addEventListener("click", function(e) {
-    //clearInterval(play.timer);
-    //play.timer = setInterval("play.AIPlay()",1000);
-    //	play.AIPlay()
-    //})
-    /*
-     com.get("offensivePlay").addEventListener("click", function(e) {
-     play.isOffensive=true;
-     play.isPlay=true ;
-     com.get("chessRight").style.display = "none";
-     play.init();
-     })
+        //clearInterval(play.timer);
+        //com.get("autoPlay").addEventListener("click", function(e) {
+        //clearInterval(play.timer);
+        //play.timer = setInterval("play.AIPlay()",1000);
+        //	play.AIPlay()
+        //})
+        /*
+         com.get("offensivePlay").addEventListener("click", function(e) {
+         play.isOffensive=true;
+         play.isPlay=true ;
+         com.get("chessRight").style.display = "none";
+         play.init();
+         })
 
-     com.get("defensivePlay").addEventListener("click", function(e) {
-     play.isOffensive=false;
-     play.isPlay=true ;
-     com.get("chessRight").style.display = "none";
-     play.init();
-     })
-     */
+         com.get("defensivePlay").addEventListener("click", function(e) {
+         play.isOffensive=false;
+         play.isPlay=true ;
+         com.get("chessRight").style.display = "none";
+         play.init();
+         })
+         */
 
 
     com.get("regretBn").addEventListener("click", function (e) {
@@ -93,10 +90,20 @@ play.init = function () {
 
 }
 
+play.connectServer = function () {
+    play.socket = new Socket()
+    play.socket.connect({
+        "aiPlay": play.AIPlay,
+        "init": function (data) {
+            play.init(JSON.parse(data))
+        }
+    })
+}
+
 
 //悔棋
 play.regret = function () {
-    var map = com.arr2Clone(com.initMap);
+    var map = com.arr2Clone(com.currentInitMap);
     //初始化所有棋子
     for (var i = 0; i < map.length; i++) {
         for (var n = 0; n < map[i].length; n++) {
@@ -169,7 +176,7 @@ play.clickMan = function (key, x, y) {
         if (play.indexOfPs(com.mans[play.nowManKey].ps, [x, y])) {
             man.isShow = false;
             var pace = com.mans[play.nowManKey].x + "" + com.mans[play.nowManKey].y
-            //z(bill.createMove(play.map,man.x,man.y,x,y))
+                //z(bill.createMove(play.map,man.x,man.y,x,y))
             delete play.map[com.mans[play.nowManKey].y][com.mans[play.nowManKey].x];
             play.map[y][x] = play.nowManKey;
             com.showPane(com.mans[play.nowManKey].x, com.mans[play.nowManKey].y, x, y)
@@ -184,7 +191,7 @@ play.clickMan = function (key, x, y) {
             com.pane.isShow = false;
             com.dot.dots = [];
             com.show()
-            // com.get("clickAudio").play();
+                // com.get("clickAudio").play();
             setTimeout(play.AIPlay, 500);
 
 
@@ -223,7 +230,7 @@ play.clickPoint = function (x, y) {
     if (play.nowManKey) {
         if (play.indexOfPs(com.mans[key].ps, [x, y])) {
             var pace = man.x + "" + man.y
-            //z(bill.createMove(play.map,man.x,man.y,x,y))
+                //z(bill.createMove(play.map,man.x,man.y,x,y))
             delete play.map[man.y][man.x];
             play.map[y][x] = key;
             com.showPane(man.x, man.y, x, y)
@@ -240,9 +247,9 @@ play.clickPoint = function (x, y) {
             // com.get("clickAudio").play();
             // 发送数据到后端
             play.socket.sendMessage("/app/playing", {
-                fromTo: record
-            })
-            // setTimeout(play.AIPlay, 500);
+                    fromTo: record
+                })
+                // setTimeout(play.AIPlay, 500);
 
         } else {
             //alert("不能这么走哦！")

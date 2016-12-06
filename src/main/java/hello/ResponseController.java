@@ -1,52 +1,64 @@
 package hello;
 
+import java.io.File;
+
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
+import cn.edu.cqu.engine.Machine;
+import cn.edu.cqu.engine.Move;
+
 @Controller
 public class ResponseController {
     int messageID = 0;
+    Machine AI = null;
 
-    // 初始化
+    // Initialize
     @MessageMapping("/init")
     @SendTo("/topic/init")
-    public ResponseMessage init(ClientMessage message) throws Exception {
+    public ResponseMessage init(String value) throws Exception {
         Thread.sleep(1000);
 
 
 
-        // 得到前端得数据
-        System.out.println(message.getFromTo());
+        // Data from FE
+        System.out.println(value);
+        
+        // AI Init
+        AI =  new Machine(2, new File("棋盘/"+ value +".txt"));
 
 
-        // 调用AI处理
-        String response = "初始化成功";
+        // Backend Processing
         System.out.println(messageID ++);
 
 
-        // 返回给前端
-        return new ResponseMessage(response);
+        // return to FE
+        return new ResponseMessage(AI.getCurrentChessboard().toJSON());
     }
 
-    // AI 处理前端数据并返回
+    // AI Play
     @MessageMapping("/playing")
     @SendTo("/topic/playing")
     public ResponseMessage transfer(ClientMessage message) throws Exception {
-        Thread.sleep(1000);
+        
 
 
-
-        // 得到前端得数据
-        System.out.println(message.getFromTo());
-
-
-        // 调用AI处理
-        String response = "7062";
-        System.out.println(messageID ++);
+        // Data from FE
+        String data = message.getFromTo();
+        String moveData[] =data.split("") ;
+       
+        
 
 
-        // 返回给前端
+        // Backend Processing
+        Move userMove = new Move( Integer.valueOf(moveData[0]),Integer.valueOf( moveData[1]), Integer.valueOf(moveData[2]), Integer.valueOf(moveData[3]));
+        AI.makeMove(userMove.sp, userMove.ep);
+        Move move = AI.search();
+        System.out.println("搜索出的步骤�?" + move);
+        String response = "" + move.sp.x + move.sp.y + move.ep.x +  move.ep.y;
+        
+        // return to FE
         return new ResponseMessage(response);
     }
 

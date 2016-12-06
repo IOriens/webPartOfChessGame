@@ -100,6 +100,11 @@
 			// 		play.init();
 			// 	}
 			// })
+
+
+			play.connectServer()
+
+
 			com.get("tyroPlay").addEventListener("click", function (e) {
 				// if (confirm("确认开始对弈？")) {
 				play.isPlay = true;
@@ -107,7 +112,9 @@
 				com.get("moveInfo").style.display = "block";
 				com.get("moveInfo").innerHTML = "";
 				play.depth = 3;
-				play.init();
+				// play.init();
+
+				play.socket.sendMessage("/app/init", "7")
 				// }
 			})
 
