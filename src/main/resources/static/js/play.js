@@ -5,6 +5,27 @@
 
 var play = play || {};
 
+
+play.initMMMap = function(map) {
+
+	for(var i in com.mans) {
+		com.mans[i].isShow = false;
+	}
+
+	// 初始化棋子
+	for (var i = 0; i < map.length; i++) {
+		for (var n = 0; n < map[i].length; n++) {
+			var key = map[i][n];
+			if (key) {
+				// console.log(key)
+				com.mans[key].x = n;
+				com.mans[key].y = i;
+				com.mans[key].isShow = true;
+			} 
+		}
+	}
+}
+
 play.init = function (map) {
 
 	play.my = 1; // 玩家方
@@ -13,7 +34,7 @@ play.init = function (map) {
 			// console.log(com.currentInitMap)
 	}
 	play.map = com.arr2Clone(com.currentInitMap); // 初始化棋盘
-	// console.log('play.map:\n', play.map)
+	console.log('play.map:\n', play.map)
 	play.nowManKey = false; // 现在要操作的棋子
 	play.pace = []; // 记录每一步
 	play.isPlay = true; // 是否能走棋
@@ -28,18 +49,7 @@ play.init = function (map) {
 
 	com.pane.isShow = false; // 隐藏方块
 
-	// 初始化棋子
-	for (var i = 0; i < play.map.length; i++) {
-		for (var n = 0; n < play.map[i].length; n++) {
-			var key = play.map[i][n];
-			if (key) {
-				// console.log(key)
-				com.mans[key].x = n;
-				com.mans[key].y = i;
-				com.mans[key].isShow = true;
-			}
-		}
-	}
+	play.initMMMap(play.map)
 	play.show();
 
 	// 绑定点击事件
@@ -90,16 +100,7 @@ play.connectServer = function () {
 play.regret = function () {
 	var map = com.arr2Clone(com.currentInitMap);
 	// 初始化所有棋子
-	for (var i = 0; i < map.length; i++) {
-		for (var n = 0; n < map[i].length; n++) {
-			var key = map[i][n];
-			if (key) {
-				com.mans[key].x = n;
-				com.mans[key].y = i;
-				com.mans[key].isShow = true;
-			}
-		}
-	}
+	play.initMMMap(map)
 	var pace = play.pace;
 	pace.pop();
 	pace.pop();
