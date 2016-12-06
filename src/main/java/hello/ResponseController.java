@@ -47,6 +47,12 @@ public class ResponseController {
 		// AI Init
 		String fileName = "ÆåÅÌ/" + Integer.valueOf(value) + ".txt";
 		System.out.println(fileName);
+		
+		
+		if(AI != null) {
+			AI.close();
+		}
+		
 		AI = new Machine(6, new File(fileName));
 
 		// Backend Processing
@@ -76,6 +82,25 @@ public class ResponseController {
 		return new ResponseMessage("done");
 	}
 
+//	// save
+//	@MessageMapping("/save")
+//	@SendTo("/topic/save")
+//	public ResponseMessage save(String value) throws Exception {
+//		
+//
+//		// Data from FE
+//		System.out.println(value);
+//
+//		// AI save
+//		AI.close();
+//		
+//		// Backend Processing
+//		System.out.println(messageID++);
+//
+//		// return to FE
+//		return new ResponseMessage("done");
+//	}
+
 	// AI Play
 	@MessageMapping("/playing")
 	@SendTo("/topic/playing")
@@ -94,10 +119,12 @@ public class ResponseController {
 		AI.makeMove(userMove.sp, userMove.ep);
 		Move move = AI.search();
 		System.out.println("ËÑË÷½á¹û£º" + move);
+		System.out.println(AI.getReasonList());
+	
 		String response = "" + move.sp.x + (9 - move.sp.y) + move.ep.x + (9 - move.ep.y);
 
 		// return to FE
-		return new ResponseMessage(response);
+		return new ResponseMessage(response + AI.getReasonList().toString());
 	}
 
 }

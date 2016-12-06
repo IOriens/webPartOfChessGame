@@ -109,6 +109,6 @@ public class Rule implements Serializable{
 		if (movetoX != null)
 			return getType() + "" + chessid + " moveTo(" + movetoX + "," + movetoY + ")";
 		else
-			return getType() + "" + chessid + "吃对方的将";
+			return getType() + "" + chessid + "�ԶԷ��Ľ�";
 	}
 }

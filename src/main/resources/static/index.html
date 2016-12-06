@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<div class="box" id="box" style="width: 838px;">
+	<div class="box" id="box" >
 		<div class="chess_left">
 			<canvas id="chess">对不起，您的浏览器不支持HTML5，请升级浏览器至IE9、firefox或者谷歌浏览器！</canvas>
 			<!--<audio src="audio/click.wav" id="clickAudio" preload="auto"></audio>-->
@@ -40,28 +40,30 @@
 					
 					<br>
 					<span id="tip">点击下方按钮开始棋局</span>
-					<input type="button" fromTo="offensivePlay" id="tyroPlay"
-						value="开始对弈" />
+					<button id="tyroPlay">开始对弈</button>
 					<!--<input type="button" fromTo="offensivePlay" id="superPlay" value="中级水平" />-->
 					<!--<input type="button" fromTo="button" id="" value="大师水平" disabled />
 				
 			<input type="button" fromTo="offensivePlay" id="offensivePlay" value="先手开始" />
 			<input type="button" fromTo="defensivePlay" id="defensivePlay" value="后手开始" />
 			-->
-					<input type="button" fromTo="regret" id="regretBn" value="悔棋" />
+					<button button" id="regretBn" >悔棋</button>
 					<!--<input type="button" fromTo="billBn" id="billBn" value="棋谱" class="bn_box" />-->
 					<!--<input type="button" fromTo="stypeBn" id="stypeBn" value="换肤" />
 				<input type="button" fromTo="download" id="download" value="源码下载" onClick="window.open('https://github.com/itlwei/ChinaChess-html5')" />-->
+					<div id="explain"></div>
 				</div>
 			</div>
 		</div>
-		<div class="chess_right" id="chessRight">
+
+
+		<!--<div class="chess_right" id="chessRight">
 			<select fromTo="billList" id="billList">
 			</select>
 			<ol id="billBox" class="bill_box">
 			</ol>
 		</div>
-		<div id="moveInfo" class="move_info"></div>
+		<div id="moveInfo" class="move_info"></div>-->
 	</div>
 
 
@@ -94,7 +96,7 @@
 			com.mans = {}; //棋子集合
 			com.createMans(com.initMap) //生成棋子
 			com.bg.show();
-			com.get("bnBox").style.display = "block";
+			// com.get("bnBox").style.display = "block";
 			//play.init();
 			// com.get("billBn").addEventListener("click", function (e) {
 			// 	if (confirm("是否结束对局，开始棋局研究？")) {
@@ -120,10 +122,10 @@
 			com.get("tyroPlay").addEventListener("click", function(e) {
 				// if (confirm("确认开始对弈？")) {
 				play.isPlay = true;
-				com.get("chessRight").style.display = "none";
-				com.get("moveInfo").style.display = "block";
-				com.get("moveInfo").innerHTML = "";
-				play.depth = 3;
+				// com.get("chessRight").style.display = "none";
+				// com.get("moveInfo").style.display = "block";
+				// com.get("moveInfo").innerHTML = "";
+				// play.depth = 3;
 				// play.init();
 
 

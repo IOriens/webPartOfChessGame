@@ -6,9 +6,9 @@
 var play = play || {};
 
 
-play.initMMMap = function(map) {
+play.initMMMap = function (map) {
 
-	for(var i in com.mans) {
+	for (var i in com.mans) {
 		com.mans[i].isShow = false;
 	}
 
@@ -21,7 +21,7 @@ play.initMMMap = function(map) {
 				com.mans[key].x = n;
 				com.mans[key].y = i;
 				com.mans[key].isShow = true;
-			} 
+			}
 		}
 	}
 }
@@ -46,11 +46,14 @@ play.init = function (map) {
 	play.isOffensive = true; // 是否先手
 	play.depth = play.depth || 3; // 搜索深度
 
+
 	play.isFoul = false; // 是否犯规长将
 
 	com.pane.isShow = false; // 隐藏方块
 
 	play.initMMMap(play.map)
+
+	document.getElementById('explain').innerHTML = ""
 	play.show();
 
 	// 绑定点击事件
@@ -158,6 +161,9 @@ play.clickCanvas = function (e) {
 
 // 点击棋子，两种情况，选中或者吃子
 play.clickMan = function (key, x, y) {
+
+	document.getElementById('explain').innerHTML = ""
+
 	var man = com.mans[key];
 	// 吃子
 	if (play.nowManKey && play.nowManKey != key &&
@@ -220,6 +226,9 @@ play.clickMan = function (key, x, y) {
 
 // 点击着点
 play.clickPoint = function (x, y) {
+	document.getElementById('explain').innerHTML = ""
+
+
 	var key = play.nowManKey;
 	var man = com.mans[key];
 	if (play.nowManKey) {
@@ -245,8 +254,8 @@ play.clickPoint = function (x, y) {
 			play.my = -1;
 			play.changeTip(1)
 			play.socket.sendMessage("/app/playing", {
-				fromTo: record
-			})
+					fromTo: record
+				})
 				// setTimeout(play.AIPlay, 500);
 
 		} else {
@@ -256,17 +265,21 @@ play.clickPoint = function (x, y) {
 }
 
 // Ai自动走棋
-play.AIPlay = function (pace) {
+play.AIPlay = function (data) {
+	console.log(data)
 
 	// console.log('pace-param: ' + pace)
 
 	// return
-	
+
 
 	// 接受后端数据
 	// var pace = AI.init(play.pace.join(""))
 	// pace = ["7", "0", "6", "2"]
-	pace = pace.split("")
+	var pace = data.substring(0, 4)
+	pace = pace.split("").map(function (item) {
+			return parseInt(item)
+		})
 		// console.log('pace-afer: ' + pace)
 
 	if (!pace) {
@@ -275,6 +288,8 @@ play.AIPlay = function (pace) {
 	}
 	play.pace.push(pace.join(""));
 	// console.log('AI: ' + pace.join(''))
+
+	console.log(pace)
 	var key = play.map[pace[1]][pace[0]]
 	play.nowManKey = key;
 
@@ -285,11 +300,11 @@ play.AIPlay = function (pace) {
 		play.AIclickPoint(pace[2], pace[3]);
 	}
 
-	
+
 	play.changeTip(0)
-	// com.get("clickAudio").play();
+		// com.get("clickAudio").play();
 	setTimeout(function () {
-		
+		document.getElementById('explain').innerHTML = data.substring(4)
 		play.my = 1;
 		if (key == "j0")
 			play.showWin(-1, 1);
@@ -300,7 +315,7 @@ play.AIPlay = function (pace) {
 }
 
 play.changeTip = function (flag) {
-	if(flag) {
+	if (flag) {
 		document.getElementById('tip').innerHTML = "电脑正在思考哦"
 	} else {
 		document.getElementById('tip').innerHTML = "该你下棋咯"
@@ -341,7 +356,8 @@ play.showWin = function (flag, tag) {
 	} else {
 		outcome = window.confirm('黑方胜利')
 	}
-	play.socket.sendMessage("/app/init", 8)
+	var index = document.getElementById('chessboard').value;
+	play.socket.sendMessage("/app/init", parseInt(index))
 }
 
 play.AIclickPoint = function (x, y) {

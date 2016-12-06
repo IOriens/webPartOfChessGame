@@ -22,7 +22,7 @@ com.init = function (stype) {
 	com.pointStartY = stype.pointStartY; //第一个着点Y坐标;
 	com.page = stype.page; //图片目录
 
-	com.get("box").style.width = com.width + 130 + "px";
+	// com.get("box").style.width = com.width + 130 + "px";
 
 	com.canvas = document.getElementById("chess"); //画布
 	com.ct = com.canvas.getContext("2d");
@@ -39,7 +39,7 @@ com.init = function (stype) {
 //样式
 com.stype = {
 	stype2:{
-		width:530,		//画布宽度
+		width:500,		//画布宽度
 		height:567, 		//画布高度
 		spaceX:57,		//着点X跨度
 		spaceY:57,		//着点Y跨度
