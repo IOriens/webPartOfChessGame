@@ -18,7 +18,7 @@ public class ResponseController {
 	Machine AI = null;
 
 	@SuppressWarnings("unchecked")
-	public String toJSON(Chessman[][] chessboard) {
+	public JSONArray toJSON(Chessman[][] chessboard) {
 
 		JSONArray chess2DBoard = new JSONArray();
 
@@ -34,10 +34,11 @@ public class ResponseController {
 			}
 			chess2DBoard.add(childJsonArray);
 		}
-		return chess2DBoard.toJSONString();
+		return chess2DBoard;
 	}
 
 	// Initialize
+	@SuppressWarnings("unchecked")
 	@MessageMapping("/init")
 	@SendTo("/topic/init")
 	public ResponseMessage init(String value) throws Exception {
@@ -48,33 +49,37 @@ public class ResponseController {
 		// AI Init
 		String fileName = "ÆåÅÌ/" + Integer.valueOf(value) + ".txt";
 		System.out.println(fileName);
-		
-		
-		if(AI != null) {
+
+		if (AI != null) {
 			AI.close();
 		}
-		
+
 		AI = new Machine(6, new File(fileName));
 
 		// Backend Processing
 		System.out.println(messageID++);
 
+		// Response JSON
+		JSONObject obj = new JSONObject();
+		obj.put("player", AI.getCurrentChessboard().isRedStep() ? 1 : 0); // true
+																			// ->
+																			// ºì
+		obj.put("chessboard", toJSON(AI.getCurrentChessboard().chessboard));
+
 		// return to FE
-		return new ResponseMessage(toJSON(AI.getCurrentChessboard().chessboard));
+		return new ResponseMessage(obj.toJSONString());
 	}
 
 	// Regret
 	@MessageMapping("/regret")
 	@SendTo("/topic/regret")
 	public ResponseMessage regert(String value) throws Exception {
-		
 
 		// Data from FE
 		System.out.println(value);
 
 		// AI regret
 		AI.moveBack();
-		
 
 		// Backend Processing
 		System.out.println(messageID++);
@@ -83,62 +88,40 @@ public class ResponseController {
 		return new ResponseMessage("done");
 	}
 
-//	// save
-//	@MessageMapping("/save")
-//	@SendTo("/topic/save")
-//	public ResponseMessage save(String value) throws Exception {
-//		
-//
-//		// Data from FE
-//		System.out.println(value);
-//
-//		// AI save
-//		AI.close();
-//		
-//		// Backend Processing
-//		System.out.println(messageID++);
-//
-//		// return to FE
-//		return new ResponseMessage("done");
-//	}
-
 	@SuppressWarnings("unchecked")
 	// AI Play
 	@MessageMapping("/playing")
 	@SendTo("/topic/playing")
 	public ResponseMessage transfer(ClientMessage message) throws Exception {
-		
-//		Thread.sleep(5000);
 
 		// Data from FE
 		String data = message.getFromTo();
-		String moveData[] = data.split("");
+		if (!data.equalsIgnoreCase("0000")) {
+			String moveData[] = data.split("");
 
-		// Backend Processing
-		System.out.println(data + "," + moveData[0]);
-		Move userMove = new Move(Integer.valueOf(moveData[0]), 9 - Integer.valueOf(moveData[1]),
-				Integer.valueOf(moveData[2]), 9 - Integer.valueOf(moveData[3]));
-		AI.makeMove(userMove.sp, userMove.ep);
-		
-		
+			// Backend Processing
+			System.out.println(data + "," + moveData[0]);
+			Move userMove = new Move(Integer.valueOf(moveData[0]), 9 - Integer.valueOf(moveData[1]),
+					Integer.valueOf(moveData[2]), 9 - Integer.valueOf(moveData[3]));
+			AI.makeMove(userMove.sp, userMove.ep);
+		}
 		// Response JSON
 		JSONObject obj = new JSONObject();
-		
+
 		// AI Move
 		Move move = AI.search();
 		System.out.println("ËÑË÷½á¹û£º" + move);
 		String response = "" + move.sp.x + (9 - move.sp.y) + move.ep.x + (9 - move.ep.y);
 		obj.put("aiMove", response);
-		System.out.println( AI.getReasonList().toString());
+		System.out.println(AI.getReasonList().toString());
 		obj.put("aiWhy", AI.getReasonList().toString());
-		
-		
+
 		// Help Message
 		Move helpMove = AI.helpSearch();
 		String helpMoveString = "" + helpMove.sp.x + (9 - helpMove.sp.y) + helpMove.ep.x + (9 - helpMove.ep.y);
 		obj.put("helpMove", helpMoveString);
 		obj.put("helpWhy", AI.getReasonList().toString());
-		
+
 		// return to FE
 		return new ResponseMessage(obj.toJSONString());
 	}

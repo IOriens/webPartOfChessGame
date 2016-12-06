@@ -26,9 +26,9 @@ play.initMMMap = function (map) {
 	}
 }
 
-play.init = function (map) {
+play.init = function (map, player) {
 
-	play.my = 1; // 玩家方
+	play.my = player; // 玩家方
 	play.changeTip(0)
 	if (map) {
 		com.currentInitMap = com.json2arr(map)
@@ -87,6 +87,12 @@ play.init = function (map) {
 	 * var nowTime= new Date().getTime(); z([h,nowTime-initTime])
 	 */
 
+	if (player === 0) {
+		play.socket.sendMessage("/app/playing", {
+			fromTo: "0000"
+		})
+	}
+
 }
 
 play.connectServer = function () {
@@ -94,7 +100,9 @@ play.connectServer = function () {
 	play.socket.connect({
 		"playing": play.AIPlay,
 		"init": function (data) {
-			play.init(JSON.parse(data))
+			data = JSON.parse(data)
+			console.log(data)
+			play.init(data['chessboard'], data['player'])
 		},
 		"regret": play.regret
 	})
@@ -365,8 +373,10 @@ play.showWin = function (flag, tag) {
 	} else {
 		outcome = window.confirm('黑方胜利')
 	}
-	var index = document.getElementById('chessboard').value;
-	play.socket.sendMessage("/app/init", parseInt(index))
+	if(outcome) {
+		var index = document.getElementById('chessboard').value;
+		play.socket.sendMessage("/app/init", parseInt(index))
+	}
 }
 
 play.AIclickPoint = function (x, y) {

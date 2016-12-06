@@ -8,7 +8,6 @@ View part of a chess game with AI
 - Run Application.java
 - Open http://localhost:8080/
 ## Todo
-- 帮助
 - 扫描棋盘
 - 黑方先
 
