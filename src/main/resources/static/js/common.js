@@ -95,6 +95,7 @@ com.show = function () {
 	for (var i = 0; i < com.childList.length; i++) {
 		com.childList[i].show();
 	}
+
 }
 
 //显示移动的棋子外框
@@ -200,11 +201,11 @@ com.json2arr = function (javaArr) {
 
 	if(!javaArr) return null;
 	for(var i in javaArr) {
-		console.log(javaArr[i])
+		// console.log(javaArr[i])
 		javaArr[i] = javaArr[i].map(function(item) {
 			return com.keys2[item]
 		})
-		console.log(javaArr[i])
+		// console.log(javaArr[i])
 	}
 
 	return javaArr

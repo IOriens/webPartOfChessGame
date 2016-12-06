@@ -40,7 +40,6 @@ public class ResponseController {
 	@MessageMapping("/init")
 	@SendTo("/topic/init")
 	public ResponseMessage init(String value) throws Exception {
-		Thread.sleep(1000);
 
 		// Data from FE
 		System.out.println(value);
@@ -57,6 +56,26 @@ public class ResponseController {
 		return new ResponseMessage(toJSON(AI.getCurrentChessboard().chessboard));
 	}
 
+	// Regret
+	@MessageMapping("/regret")
+	@SendTo("/topic/regret")
+	public ResponseMessage regert(String value) throws Exception {
+		
+
+		// Data from FE
+		System.out.println(value);
+
+		// AI regret
+		AI.moveBack();
+		
+
+		// Backend Processing
+		System.out.println(messageID++);
+
+		// return to FE
+		return new ResponseMessage("done");
+	}
+
 	// AI Play
 	@MessageMapping("/playing")
 	@SendTo("/topic/playing")
@@ -68,12 +87,12 @@ public class ResponseController {
 
 		// Backend Processing
 		System.out.println(data + "," + moveData[0]);
-		Move userMove = new Move(Integer.valueOf(moveData[0]),9 - Integer.valueOf(moveData[1]),
+		Move userMove = new Move(Integer.valueOf(moveData[0]), 9 - Integer.valueOf(moveData[1]),
 				Integer.valueOf(moveData[2]), 9 - Integer.valueOf(moveData[3]));
 		AI.makeMove(userMove.sp, userMove.ep);
 		Move move = AI.search();
 		System.out.println("ËÑË÷½á¹û£º" + move);
-		String response = "" + move.sp.x +(9 - move.sp.y) + move.ep.x + (9 - move.ep.y);
+		String response = "" + move.sp.x + (9 - move.sp.y) + move.ep.x + (9 - move.ep.y);
 
 		// return to FE
 		return new ResponseMessage(response);

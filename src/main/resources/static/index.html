@@ -2,9 +2,9 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<title>中国象棋 in html5</title>
-	<!--
+<meta charset="utf-8">
+<title>中国象棋 in html5</title>
+<!--
 /**
  * ChinaChess - in html5
  * http://www.jnzo.com/chess/
@@ -13,7 +13,7 @@
  * @ QQ 28701884
  */
 -->
-	<link href="css/chess.css" rel="stylesheet" type="text/css">
+<link href="css/chess.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -25,7 +25,8 @@
 			<!--<audio src="audio/select.wav" id="selectAudio" preload="auto"></audio>-->
 			<div>
 				<div class="bn_box" id="bnBox">
-					<input type="button" fromTo="offensivePlay" id="tyroPlay" value="开始对弈" />
+					<input type="button" fromTo="offensivePlay" id="tyroPlay"
+						value="开始对弈" />
 					<!--<input type="button" fromTo="offensivePlay" id="superPlay" value="中级水平" />-->
 					<!--<input type="button" fromTo="button" id="" value="大师水平" disabled />
 				
@@ -41,11 +42,11 @@
 		</div>
 		<div class="chess_right" id="chessRight">
 			<select fromTo="billList" id="billList">
-		</select>
+			</select>
 			<ol id="billBox" class="bill_box">
 			</ol>
 		</div>
-		<div id="moveInfo" class="move_info"> </div>
+		<div id="moveInfo" class="move_info"></div>
 	</div>
 
 
@@ -64,19 +65,17 @@
 	<!--<script type="text/javascript" src="js/AI.js"></script>-->
 	<!--<script type="text/javascript" src="js/bill.js"></script>-->
 	<!--<script type="text/javascript" src="js/gambit.js"></script>-->
-	<div style="display:none">
-	</div>
+	<div style="display: none"></div>
 
 
 	<script>
-
-		window.onload = function () {
+		window.onload = function() {
 			com.bg = new com.class.Bg();
 			com.dot = new com.class.Dot();
 			com.pane = new com.class.Pane();
 			com.pane.isShow = false;
 
-			com.childList = [com.bg, com.dot, com.pane];
+			com.childList = [ com.bg, com.dot, com.pane ];
 			com.mans = {}; //棋子集合
 			com.createMans(com.initMap) //生成棋子
 			com.bg.show();
@@ -101,11 +100,9 @@
 			// 	}
 			// })
 
-
 			play.connectServer()
 
-
-			com.get("tyroPlay").addEventListener("click", function (e) {
+			com.get("tyroPlay").addEventListener("click", function(e) {
 				// if (confirm("确认开始对弈？")) {
 				play.isPlay = true;
 				com.get("chessRight").style.display = "none";
@@ -114,7 +111,7 @@
 				play.depth = 3;
 				// play.init();
 
-				play.socket.sendMessage("/app/init", 7)
+				play.socket.sendMessage("/app/init", 8)
 				// }
 			})
 
@@ -146,14 +143,13 @@
 			// 		com.store = data.split(" ");
 			// 	})
 
-
-//			// 直接开始哈哈哈哈
-//			play.isPlay = true;
-//			com.get("chessRight").style.display = "none";
-//			com.get("moveInfo").style.display = "block";
-//			com.get("moveInfo").innerHTML = "";
-//			play.depth = 3;
-//			play.init();
+			//			// 直接开始哈哈哈哈
+			//			play.isPlay = true;
+			//			com.get("chessRight").style.display = "none";
+			//			com.get("moveInfo").style.display = "block";
+			//			com.get("moveInfo").innerHTML = "";
+			//			play.depth = 3;
+			//			play.init();
 		}
 	</script>
 </body>
