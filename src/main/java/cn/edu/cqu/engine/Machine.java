@@ -108,4 +108,35 @@ public class Machine {
 	public Chessboard getCurrentChessboard() {
 		return history.getLast();
 	}
+	
+	/**
+	 * 帮助人完成分析
+	 * 
+	 * @return 返回搜索之后做出的选择，可以从中得到是否已经分出胜负
+	 */
+	public Move helpSearch() {
+		Chessboard father = history.getLast();
+		List<Rule> recommandList = new LinkedList<>();
+		AlphaBetaSearch abSearch = new AlphaBetaSearch(depth, father, recommandList, holder);
+		Rule ruleToUse = abSearch.search();
+
+		// create a Move
+		Move move = new Move();
+
+		if (ruleToUse != null) {
+			Chessboard son = new Chessboard();
+			son.genFrom(father, ruleToUse);
+			move = son.getMove();
+
+			if (son.stop()) {
+				move.setRedWin(father.isRedStep());
+			}
+		} else {
+			move.sp = new Point(0, 0);
+			move.ep = new Point(0, 0);
+			move.setRedWin(!father.isRedStep());
+		}
+		return move;
+	}
+	
 }

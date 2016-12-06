@@ -266,7 +266,9 @@ play.clickPoint = function (x, y) {
 
 // Ai自动走棋
 play.AIPlay = function (data) {
+	data = JSON.parse(data)
 	console.log(data)
+
 
 	// console.log('pace-param: ' + pace)
 
@@ -276,7 +278,8 @@ play.AIPlay = function (data) {
 	// 接受后端数据
 	// var pace = AI.init(play.pace.join(""))
 	// pace = ["7", "0", "6", "2"]
-	var pace = data.substring(0, 4)
+	var pace = data["aiMove"]
+	console.log(pace)
 	pace = pace.split("").map(function (item) {
 			return parseInt(item)
 		})
@@ -304,7 +307,13 @@ play.AIPlay = function (data) {
 	play.changeTip(0)
 		// com.get("clickAudio").play();
 	setTimeout(function () {
-		document.getElementById('explain').innerHTML = data.substring(4)
+		var helpTxt = ""
+		helpTxt += `机器助手提示：你可从（${data['helpMove'][0]}，${data['helpMove'][1]}）走到（${data['helpMove'][2]}，${data['helpMove'][3]}）<br>`
+		helpTxt += `AI行走推理链: ${data["aiWhy"]}<br>`
+		helpTxt += `机器助手推理链: ${data["helpWhy"]}`
+
+
+		document.getElementById('explain').innerHTML = helpTxt
 		play.my = 1;
 		if (key == "j0")
 			play.showWin(-1, 1);

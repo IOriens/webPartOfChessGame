@@ -39,7 +39,7 @@ com.init = function (stype) {
 //样式
 com.stype = {
 	stype2:{
-		width:500,		//画布宽度
+		width:510,		//画布宽度
 		height:567, 		//画布高度
 		spaceX:57,		//着点X跨度
 		spaceY:57,		//着点Y跨度

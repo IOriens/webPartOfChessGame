@@ -3,6 +3,7 @@ package hello;
 import java.io.File;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -101,6 +102,7 @@ public class ResponseController {
 //		return new ResponseMessage("done");
 //	}
 
+	@SuppressWarnings("unchecked")
 	// AI Play
 	@MessageMapping("/playing")
 	@SendTo("/topic/playing")
@@ -117,14 +119,28 @@ public class ResponseController {
 		Move userMove = new Move(Integer.valueOf(moveData[0]), 9 - Integer.valueOf(moveData[1]),
 				Integer.valueOf(moveData[2]), 9 - Integer.valueOf(moveData[3]));
 		AI.makeMove(userMove.sp, userMove.ep);
+		
+		
+		// Response JSON
+		JSONObject obj = new JSONObject();
+		
+		// AI Move
 		Move move = AI.search();
 		System.out.println("ËÑË÷½á¹û£º" + move);
-		System.out.println(AI.getReasonList());
-	
 		String response = "" + move.sp.x + (9 - move.sp.y) + move.ep.x + (9 - move.ep.y);
-
+		obj.put("aiMove", response);
+		System.out.println( AI.getReasonList().toString());
+		obj.put("aiWhy", AI.getReasonList().toString());
+		
+		
+		// Help Message
+		Move helpMove = AI.helpSearch();
+		String helpMoveString = "" + helpMove.sp.x + (9 - helpMove.sp.y) + helpMove.ep.x + (9 - helpMove.ep.y);
+		obj.put("helpMove", helpMoveString);
+		obj.put("helpWhy", AI.getReasonList().toString());
+		
 		// return to FE
-		return new ResponseMessage(response + AI.getReasonList().toString());
+		return new ResponseMessage(obj.toJSONString());
 	}
 
 }
