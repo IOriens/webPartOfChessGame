@@ -2,9 +2,9 @@
 <html>
 
 <head>
-<meta charset="utf-8">
-<title>中国象棋 in html5</title>
-<!--
+	<meta charset="utf-8">
+	<title>中国象棋 in html5</title>
+	<!--
 /**
  * ChinaChess - in html5
  * http://www.jnzo.com/chess/
@@ -13,20 +13,23 @@
  * @ QQ 28701884
  */
 -->
-<link href="css/chess.css" rel="stylesheet" type="text/css">
+	<link href="css/chess.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-	<div class="box" id="box" >
+	<div class="box" id="box">
 		<div class="chess_left">
 			<canvas id="chess">对不起，您的浏览器不支持HTML5，请升级浏览器至IE9、firefox或者谷歌浏览器！</canvas>
 			<!--<audio src="audio/click.wav" id="clickAudio" preload="auto"></audio>-->
 			<!--<audio src="audio/check.wav" id="checkAudio" preload="auto"></audio>-->
 			<!--<audio src="audio/select.wav" id="selectAudio" preload="auto"></audio>-->
-			<div>
-				<div class="bn_box" id="bnBox">
-					<label for="chessboard">棋盘：</label>
-					<select name="chessboard" id="chessboard">
+		</div>
+		<div class="chess_right">
+			<!--<div class="bn_box" id="bnBox">-->
+				<span id="tip">点击下方按钮开始棋局</span>
+			<label for="chessboard">棋盘：</label>
+
+			<select name="chessboard" id="chessboard">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -37,29 +40,23 @@
 						<option value="8">8</option>
 						<option value="9">9</option>
 					</select>
-					
-					<br>
-					<span id="tip">点击下方按钮开始棋局</span>
-					<button id="tyroPlay">开始对弈</button>
-					<!--<input type="button" fromTo="offensivePlay" id="superPlay" value="中级水平" />-->
-					<!--<input type="button" fromTo="button" id="" value="大师水平" disabled />
+			<br>
+			
+			<button id="tyroPlay">开始对弈</button>
+			<!--<input type="button" fromTo="offensivePlay" id="superPlay" value="中级水平" />-->
+			<!--<input type="button" fromTo="button" id="" value="大师水平" disabled />
 				
 			<input type="button" fromTo="offensivePlay" id="offensivePlay" value="先手开始" />
 			<input type="button" fromTo="defensivePlay" id="defensivePlay" value="后手开始" />
 			-->
-					<button id="regretBn">悔棋</button>
-					<button id="helpBtn">帮我一下</button>
-					<!--<input type="button" fromTo="billBn" id="billBn" value="棋谱" class="bn_box" />-->
-					<!--<input type="button" fromTo="stypeBn" id="stypeBn" value="换肤" />
+			<button id="regretBn">悔棋</button>
+			<button id="helpBtn">帮我一下</button>
+			<!--<input type="button" fromTo="billBn" id="billBn" value="棋谱" class="bn_box" />-->
+			<!--<input type="button" fromTo="stypeBn" id="stypeBn" value="换肤" />
 				<input type="button" fromTo="download" id="download" value="源码下载" onClick="window.open('https://github.com/itlwei/ChinaChess-html5')" />-->
-					<div id="explain"></div>
-					<div id="helpMessage"></div>
-
-				</div>
-			</div>
+			<!--</div>-->
 		</div>
-
-
+		
 		<!--<div class="chess_right" id="chessRight">
 			<select fromTo="billList" id="billList">
 			</select>
@@ -68,28 +65,21 @@
 		</div>
 		<div id="moveInfo" class="move_info"></div>-->
 	</div>
-
-
-
+	<div id="explain"></div>
+		<div id="helpMessage"></div>
 	<!--Libs-->
 	<script src="js/lib/jquery.min.js"></script>
 	<script src="js/lib/sockjs.min.js"></script>
 	<script src="js/lib/stomp.min.js"></script>
-
 	<!--Impl-->
 	<script src="js/socket.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript" src="js/play.js"></script>
-
 	<!--Not useful any more-->
 	<!--<script type="text/javascript" src="js/AI.js"></script>-->
 	<!--<script type="text/javascript" src="js/bill.js"></script>-->
 	<!--<script type="text/javascript" src="js/gambit.js"></script>-->
-	
-	
 	<div style="display: none"></div>
-
-
 	<script>
 		window.onload = function() {
 			com.bg = new com.class.Bg();

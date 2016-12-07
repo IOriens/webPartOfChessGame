@@ -54,6 +54,7 @@ play.init = function (map, player) {
 	play.initMMMap(play.map)
 
 	document.getElementById('explain').innerHTML = ""
+	document.getElementById('helpMessage').innerHTML = ""
 	play.show();
 
 	// 绑定点击事件
@@ -182,6 +183,7 @@ play.clickCanvas = function (e) {
 play.clickMan = function (key, x, y) {
 
 	document.getElementById('explain').innerHTML = ""
+	document.getElementById('helpMessage').innerHTML = ""
 
 	var man = com.mans[key];
 	// 吃子
@@ -252,6 +254,7 @@ play.clickMan = function (key, x, y) {
 // 点击着点
 play.clickPoint = function (x, y) {
 	document.getElementById('explain').innerHTML = ""
+	document.getElementById('helpMessage').innerHTML = ""
 
 
 	var key = play.nowManKey;
@@ -336,6 +339,7 @@ play.AIPlay = function (data) {
 	var helpTxt = ""
 	helpTxt += `AI行走推理链: ${data["aiWhy"]}<br>`
 	document.getElementById('explain').innerHTML = helpTxt
+	document.getElementById('helpMessage').innerHTML = ""
 	setTimeout(function () {
 		// var helpTxt = ""
 		// helpTxt += `机器助手提示：你可从（${data['helpMove'][0]}，${data['helpMove'][1]}）走到（${data['helpMove'][2]}，${data['helpMove'][3]}）<br>`
