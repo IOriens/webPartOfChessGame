@@ -104,7 +104,18 @@ play.connectServer = function () {
 			console.log(data)
 			play.init(data['chessboard'], data['player'])
 		},
-		"regret": play.regret
+		"regret": play.regret,
+		"help": function (data) {
+			data = JSON.parse(data)
+			var helpTxt = ""
+			if (data['helpMove']) {
+				helpTxt += `机器助手提示：你可从（${data['helpMove'][0]}，${data['helpMove'][1]}）走到（${data['helpMove'][2]}，${data['helpMove'][3]}）<br>`
+			}
+			if (data["helpWhy"]) {
+				helpTxt += `机器助手推理链: ${data["helpWhy"]}`
+			}
+			document.getElementById('helpMessage').innerHTML = helpTxt
+		}
 	})
 }
 
@@ -185,7 +196,7 @@ play.clickMan = function (key, x, y) {
 			delete play.map[com.mans[play.nowManKey].y][com.mans[play.nowManKey].x];
 			play.map[y][x] = play.nowManKey;
 			com.showPane(com.mans[play.nowManKey].x,
-			com.mans[play.nowManKey].y, x, y)
+				com.mans[play.nowManKey].y, x, y)
 			com.mans[play.nowManKey].x = x;
 			com.mans[play.nowManKey].y = y;
 			com.mans[play.nowManKey].alpha = 1
@@ -323,13 +334,7 @@ play.AIPlay = function (data) {
 
 
 	var helpTxt = ""
-	if (data['helpMove']) {
-		helpTxt += `机器助手提示：你可从（${data['helpMove'][0]}，${data['helpMove'][1]}）走到（${data['helpMove'][2]}，${data['helpMove'][3]}）<br>`
-	}
 	helpTxt += `AI行走推理链: ${data["aiWhy"]}<br>`
-	if (data["helpWhy"]) {
-		helpTxt += `机器助手推理链: ${data["helpWhy"]}`
-	}
 	document.getElementById('explain').innerHTML = helpTxt
 	setTimeout(function () {
 		// var helpTxt = ""

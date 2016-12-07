@@ -48,11 +48,13 @@
 			<input type="button" fromTo="defensivePlay" id="defensivePlay" value="后手开始" />
 			-->
 					<button id="regretBn">悔棋</button>
-
+					<button id="helpBtn">帮我一下</button>
 					<!--<input type="button" fromTo="billBn" id="billBn" value="棋谱" class="bn_box" />-->
 					<!--<input type="button" fromTo="stypeBn" id="stypeBn" value="换肤" />
 				<input type="button" fromTo="download" id="download" value="源码下载" onClick="window.open('https://github.com/itlwei/ChinaChess-html5')" />-->
 					<div id="explain"></div>
+					<div id="helpMessage"></div>
+
 				</div>
 			</div>
 		</div>
@@ -134,6 +136,12 @@
 
 				var index = document.getElementById('chessboard').value;
 				play.socket.sendMessage("/app/init", parseInt(index))
+				// }
+			})
+
+			com.get("helpBtn").addEventListener("click", function(e) {
+				// if (confirm("确认开始对弈？")) {
+				play.socket.sendMessage("/app/help", 1)
 				// }
 			})
 

@@ -51,15 +51,15 @@ public class ResponseController {
 		System.out.println(fileName);
 
 		if (AI != null) {
-			
-//			AI.close();
-//			System.out.println("## AI CLOSE");
+
+			// AI.close();
+			// System.out.println("## AI CLOSE");
 		}
 
 		AI = new Machine(6, new File(fileName));
 
 		// Backend Processing
-		//System.out.println(messageID++);
+		// System.out.println(messageID++);
 
 		// Response JSON
 		JSONObject obj = new JSONObject();
@@ -84,37 +84,64 @@ public class ResponseController {
 		AI.moveBack();
 
 		// Backend Processing
-		//System.out.println(messageID++);
+		// System.out.println(messageID++);
 
 		// return to FE
 		return new ResponseMessage("done");
 	}
-	
+
 	// Man Win
-		@MessageMapping("/manwin")
-//		@SendTo("/topic/manwin")
-		public ResponseMessage manwin(ClientMessage message) throws Exception {
+	@MessageMapping("/manwin")
+	// @SendTo("/topic/manwin")
+	public ResponseMessage manwin(ClientMessage message) throws Exception {
 
-			// Data from FE
-			String data = message.getFromTo();
-			if (!data.equalsIgnoreCase("0000")) {
-				String moveData[] = data.split("");
-
-				// Backend Processing
-//				Move userMove = new Move(Integer.valueOf(moveData[0]), 9 - Integer.valueOf(moveData[1]),
-//						Integer.valueOf(moveData[2]), 9 - Integer.valueOf(moveData[3]));
-//				AI.makeMove(userMove.sp, userMove.ep);
-			}
-			
-			// AI regret
-			AI.close();
+		// Data from FE
+		String data = message.getFromTo();
+		if (!data.equalsIgnoreCase("0000")) {
+			String moveData[] = data.split("");
 
 			// Backend Processing
-			//System.out.println(messageID++);
-
-			// return to FE
-			return new ResponseMessage("done");
+			// Move userMove = new Move(Integer.valueOf(moveData[0]), 9 -
+			// Integer.valueOf(moveData[1]),
+			// Integer.valueOf(moveData[2]), 9 - Integer.valueOf(moveData[3]));
+			// AI.makeMove(userMove.sp, userMove.ep);
 		}
+
+		// AI regret
+		AI.close();
+
+		// Backend Processing
+		// System.out.println(messageID++);
+
+		// return to FE
+		return new ResponseMessage("done");
+	}
+
+	@SuppressWarnings("unchecked")
+	@MessageMapping("/help")
+	@SendTo("/topic/help")
+	public ResponseMessage help(String value) throws Exception {
+
+		// Data from FE
+		System.out.println(value);
+
+		// AI regret
+		AI.close();
+
+		// Response JSON
+		JSONObject obj = new JSONObject();
+		// Help Message
+		Move helpMove = AI.helpSearch();
+		String helpMoveString = "" + helpMove.sp.x + (9 - helpMove.sp.y) + helpMove.ep.x + (9 - helpMove.ep.y);
+		obj.put("helpMove", helpMoveString);
+		obj.put("helpWhy", AI.getReasonList().toString());
+
+		// Backend Processing
+		// System.out.println(messageID++);
+
+		// return to FE
+		return new ResponseMessage(obj.toJSONString());
+	}
 
 	@SuppressWarnings("unchecked")
 	// AI Play
@@ -144,11 +171,7 @@ public class ResponseController {
 		if (move.redWin != null) {
 			AI.close();
 		} else {
-			// Help Message
-			Move helpMove = AI.helpSearch();
-			String helpMoveString = "" + helpMove.sp.x + (9 - helpMove.sp.y) + helpMove.ep.x + (9 - helpMove.ep.y);
-			obj.put("helpMove", helpMoveString);
-			obj.put("helpWhy", AI.getReasonList().toString());
+
 		}
 
 		// return to FE
