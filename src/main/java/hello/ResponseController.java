@@ -51,13 +51,15 @@ public class ResponseController {
 		System.out.println(fileName);
 
 		if (AI != null) {
-			AI.close();
+			
+//			AI.close();
+//			System.out.println("## AI CLOSE");
 		}
 
 		AI = new Machine(6, new File(fileName));
 
 		// Backend Processing
-		System.out.println(messageID++);
+		//System.out.println(messageID++);
 
 		// Response JSON
 		JSONObject obj = new JSONObject();
@@ -82,7 +84,7 @@ public class ResponseController {
 		AI.moveBack();
 
 		// Backend Processing
-		System.out.println(messageID++);
+		//System.out.println(messageID++);
 
 		// return to FE
 		return new ResponseMessage("done");
@@ -100,7 +102,6 @@ public class ResponseController {
 			String moveData[] = data.split("");
 
 			// Backend Processing
-			System.out.println(data + "," + moveData[0]);
 			Move userMove = new Move(Integer.valueOf(moveData[0]), 9 - Integer.valueOf(moveData[1]),
 					Integer.valueOf(moveData[2]), 9 - Integer.valueOf(moveData[3]));
 			AI.makeMove(userMove.sp, userMove.ep);
@@ -110,17 +111,19 @@ public class ResponseController {
 
 		// AI Move
 		Move move = AI.search();
-		System.out.println("ËÑË÷½á¹û£º" + move);
+		System.out.println("## AI PLAYING: " + move);
 		String response = "" + move.sp.x + (9 - move.sp.y) + move.ep.x + (9 - move.ep.y);
 		obj.put("aiMove", response);
-		System.out.println(AI.getReasonList().toString());
 		obj.put("aiWhy", AI.getReasonList().toString());
-
-		// Help Message
-		Move helpMove = AI.helpSearch();
-		String helpMoveString = "" + helpMove.sp.x + (9 - helpMove.sp.y) + helpMove.ep.x + (9 - helpMove.ep.y);
-		obj.put("helpMove", helpMoveString);
-		obj.put("helpWhy", AI.getReasonList().toString());
+		if (move.redWin != null) {
+			AI.close();
+		} else {
+			// Help Message
+			Move helpMove = AI.helpSearch();
+			String helpMoveString = "" + helpMove.sp.x + (9 - helpMove.sp.y) + helpMove.ep.x + (9 - helpMove.ep.y);
+			obj.put("helpMove", helpMoveString);
+			obj.put("helpWhy", AI.getReasonList().toString());
+		}
 
 		// return to FE
 		return new ResponseMessage(obj.toJSONString());

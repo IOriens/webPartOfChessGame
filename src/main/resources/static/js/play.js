@@ -314,14 +314,24 @@ play.AIPlay = function (data) {
 
 	play.changeTip(0)
 		// com.get("clickAudio").play();
-	setTimeout(function () {
-		var helpTxt = ""
+
+
+	var helpTxt = ""
+	if (data['helpMove']) {
 		helpTxt += `机器助手提示：你可从（${data['helpMove'][0]}，${data['helpMove'][1]}）走到（${data['helpMove'][2]}，${data['helpMove'][3]}）<br>`
-		helpTxt += `AI行走推理链: ${data["aiWhy"]}<br>`
+	}
+	helpTxt += `AI行走推理链: ${data["aiWhy"]}<br>`
+	if (data["helpWhy"]) {
 		helpTxt += `机器助手推理链: ${data["helpWhy"]}`
+	}
+	document.getElementById('explain').innerHTML = helpTxt
+	setTimeout(function () {
+		// var helpTxt = ""
+		// helpTxt += `机器助手提示：你可从（${data['helpMove'][0]}，${data['helpMove'][1]}）走到（${data['helpMove'][2]}，${data['helpMove'][3]}）<br>`
+		// helpTxt += `AI行走推理链: ${data["aiWhy"]}<br>`
+		// helpTxt += `机器助手推理链: ${data["helpWhy"]}`
+		// document.getElementById('explain').innerHTML = helpTxt
 
-
-		document.getElementById('explain').innerHTML = helpTxt
 		play.my = 1;
 		if (key == "j0")
 			play.showWin(-1, 1);
@@ -373,7 +383,7 @@ play.showWin = function (flag, tag) {
 	} else {
 		outcome = window.confirm('黑方胜利')
 	}
-	if(outcome) {
+	if (outcome) {
 		var index = document.getElementById('chessboard').value;
 		play.socket.sendMessage("/app/init", parseInt(index))
 	}
