@@ -185,7 +185,7 @@ play.clickMan = function (key, x, y) {
 			delete play.map[com.mans[play.nowManKey].y][com.mans[play.nowManKey].x];
 			play.map[y][x] = play.nowManKey;
 			com.showPane(com.mans[play.nowManKey].x,
-				com.mans[play.nowManKey].y, x, y)
+			com.mans[play.nowManKey].y, x, y)
 			com.mans[play.nowManKey].x = x;
 			com.mans[play.nowManKey].y = y;
 			com.mans[play.nowManKey].alpha = 1
@@ -204,8 +204,14 @@ play.clickMan = function (key, x, y) {
 			play.changeTip(1)
 			setTimeout(function () {
 				if (key == "j0") {
+					play.socket.sendMessage("/app/manwin", {
+						fromTo: record
+					})
 					play.showWin(-1, 3);
 				} else if (key == "J0") {
+					play.socket.sendMessage("/app/manwin", {
+						fromTo: record
+					})
 					play.showWin(1, 4);
 				} else {
 					play.socket.sendMessage("/app/playing", {
@@ -377,6 +383,7 @@ play.AIclickMan = function (key, x, y) {
 play.showWin = function (flag, tag) {
 
 	console.log(tag)
+	document.getElementById('tip').innerHTML = "&nbsp"
 	var outcome = 0
 	if (flag === 1) {
 		outcome = window.confirm('红方胜利')

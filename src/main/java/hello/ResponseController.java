@@ -89,6 +89,32 @@ public class ResponseController {
 		// return to FE
 		return new ResponseMessage("done");
 	}
+	
+	// Man Win
+		@MessageMapping("/manwin")
+//		@SendTo("/topic/manwin")
+		public ResponseMessage manwin(ClientMessage message) throws Exception {
+
+			// Data from FE
+			String data = message.getFromTo();
+			if (!data.equalsIgnoreCase("0000")) {
+				String moveData[] = data.split("");
+
+				// Backend Processing
+//				Move userMove = new Move(Integer.valueOf(moveData[0]), 9 - Integer.valueOf(moveData[1]),
+//						Integer.valueOf(moveData[2]), 9 - Integer.valueOf(moveData[3]));
+//				AI.makeMove(userMove.sp, userMove.ep);
+			}
+			
+			// AI regret
+			AI.close();
+
+			// Backend Processing
+			//System.out.println(messageID++);
+
+			// return to FE
+			return new ResponseMessage("done");
+		}
 
 	@SuppressWarnings("unchecked")
 	// AI Play
